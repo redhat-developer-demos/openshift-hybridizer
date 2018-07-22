@@ -1,0 +1,8 @@
+---
+- name: Create instance(s)
+  hosts: localhost
+  connection: local
+  gather_facts: no
+    
+  roles:
+    - cloud-resources-rollback

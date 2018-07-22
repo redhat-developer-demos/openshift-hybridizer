@@ -1,0 +1,23 @@
+openshift_release: "v3.9"
+openshift_deployment_type: origin
+v_origin_installer_image: v3.9.28
+v_ocp_installer_image: v3.9.33-3
+openshift_firewall_ports:
+  udp:
+    - 53
+    - 8053
+    - 4789
+    - 2049
+  tcp:
+    - 22
+    - 443
+    - 80
+    - 8443
+    - 10250
+    - 2379
+    - 2380
+    - 8444
+    - 2049
+    - 53
+    - 8053
+  

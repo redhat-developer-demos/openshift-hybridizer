@@ -1,0 +1,31 @@
+ansible_host: {{cloud_host}}
+ansible_user: {{cloud_user}}
+ansible_ssh_private_key_file: /opt/app-root/src/.ssh/{{private_key_file.split('/')[-1]}}
+
+{% if is_rhel -%}
+deployment_type: openshift-enterprise
+networkPluginName: redhat/ovs-networkpolicy
+{% else -%}
+deployment_type: origin
+{% endif %}
+
+{% if cloud_provider == 'gcp' %}
+openshift_cloudprovider_kind: gce
+openshift_gcp_project: {{gcp.project_id}}
+openshift_gcp_prefix: allinone
+{% elif cloud_provider == 'aws'  %}
+openshift_cloudprovider_kind: aws
+openshift_cloudprovider_aws_access_key: "{{ aws.access_key }}"
+openshift_cloudprovider_aws_secret_key: "{{ aws.secret_key }}"
+openshift_clusterid: allinone
+{% elif cloud_provider == 'azr'  -%}
+openshift_cloudprovider_kind: azure
+osm_controller_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf']}"
+osm_api_server_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf']}"
+openshift_node_kubelet_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf'], 'enable-controller-attach-detach': ['true']}"
+{% endif %}
+
+# the default domain suffixes to the app
+openshift_master_default_subdomain: "{{cloud_host}}.nip.io"
+# accessing the master API from outside world
+openshift_public_hostname: "{{cloud_host}}"

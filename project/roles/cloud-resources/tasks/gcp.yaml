@@ -1,0 +1,75 @@
+---
+
+- name: Provisioning GCE
+  debug:
+   msg: "Provisioning GCE Instances"
+
+- name: GCE Create Static IP
+  gce_eip:
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    name: openshift-ip
+    region: "{{gcp.region}}"
+    state: present
+  tags:
+    - cloud-gcp
+
+- name: GCE Create All In One OpenShift Node
+  gce:
+    instance_names: "{{instance_name}}"
+    machine_type: "{{gcp.machine_type}}"
+    image: "{{gcp.image}}"
+    external_ip: "openshift-ip"
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    zone: "{{gcp.zone}}"
+    disk_size: "20"
+    persistent_boot_disk: "True"
+    service_account_permissions:
+      - logging-write
+      - monitoring
+      - compute-rw
+      - storage-rw
+      - 'https://www.googleapis.com/auth/pubsub'
+      - 'https://www.googleapis.com/auth/trace.append'
+    tags: http-server,https-server,openshift-master
+  register: gce_master
+  tags:
+    - cloud-gcp
+
+- name: GCE Create Docker Disk
+  gce_pd:
+    name: "{{instance_name}}-docker-disk"
+    size_gb: "{{gcp.docker_disk_size}}"
+    delete_on_termination: "yes"
+    disk_type: pd-ssd
+    instance_name: "{{instance_name}}"
+    mode: READ_WRITE
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    zone: "{{gcp.zone}}"
+  tags:
+    - cloud-gcp
+
+- name: GCP Set VM Facts
+  set_fact:
+      public_ip: "{{ gce_master.instance_data[0].public_ip }}"
+#############################################################################
+## Write to inventory
+##############################################################################
+- name: Setup Cloud Inventory Tasks
+  include_tasks: "cloud_inventory.yaml"
+  vars:
+    cloud_host: "{{ public_ip }}"
+    cloud_user: "{{ gcp.cloud_user}}"
+    private_key_file: "{{gcp.private_key_file}}"
+    cloud_host_alias: "gcp-openshift"
+    cloud_provider: "gcp"
+    is_rhel: "{{gcp.is_rhel}}"
+    hybricloud_inventory_dir: "{{hybridcloud_distro_base_dir}}/gcp/inventory"
+    hybridcloud_distro_dir: "{{hybridcloud_distro_base_dir}}/gcp"
+  tags:
+    - cloud-gcp

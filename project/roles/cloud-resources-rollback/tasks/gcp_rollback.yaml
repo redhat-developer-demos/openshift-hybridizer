@@ -1,0 +1,21 @@
+---
+- name: GCE Delete All In One OpenShift Node
+  gce:
+    instance_names: "{{instance_name}}"
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    zone: "{{gcp.zone}}"
+    state: absent
+  ignore_errors: True
+
+- name: GCE Delete Static IP
+  gce_eip:
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    name: openshift-ip
+    region: "{{gcp.region}}"
+    state: absent
+  ignore_errors: True
+    

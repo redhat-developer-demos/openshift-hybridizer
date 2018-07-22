@@ -1,0 +1,11 @@
+- name: Deprovision Node in GCP
+  include_tasks: "gcp_rollback.yaml"
+  when: gcp_rollback
+
+- name: Deprovision Node in AWS
+  include_tasks: "aws_rollback.yaml"
+  when: aws_rollback
+
+- name: Deprovision Node in Azure
+  include_tasks: "azure_rollback.yaml"
+  when: azure_rollback

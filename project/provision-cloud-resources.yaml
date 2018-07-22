@@ -1,0 +1,14 @@
+---
+- name: Create instance(s)
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  roles:
+    - cloud-resources
+
+- name: Azure Reconfigure Network Interface for CentOS Guests
+  hosts: "azr-openshift"
+  roles:
+    - { role: azure_network_reconfig , when: (azr.image.offer == 'CentOS' and 'azr' in clouds) }
+  

@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+
+_CURR_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+
+#############################
+### Prepare for openshift
+############################
+docker run  -u `id -u`  \
+-v ${_CURR_DIR}/inventory:/tmp/inventory \
+-v ${_CURR_DIR}/docker-storage-setup:/tmp/docker-storage-setup \
+-v ${_CURR_DIR}/hosts_prepare.yaml:/tmp/hosts_prepare.yaml \
+{% if cloud_provider == 'azr' %}
+-v ${_CURR_DIR}/azure.conf:/tmp/azure.conf \
+{% endif %}
+-v $HOME/.ssh:/opt/app-root/src/.ssh \
+-e INVENTORY_DIR=/tmp/inventory \
+-e OPTS="--become -v" \
+-e PLAYBOOK_FILE=/tmp/hosts_prepare.yaml \
+{% if is_rhel -%}
+registry.access.redhat.com/openshift3/ose-ansible:{{v_ocp_installer_image}}
+{% else -%}
+docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
+{% endif %}
+
+#############################
+### openshift pre-req
+############################
+docker run -u `id -u` \
+-v ${_CURR_DIR}/inventory:/tmp/inventory \
+-v $HOME/.ssh:/opt/app-root/src/.ssh \
+-e INVENTORY_DIR=/tmp/inventory \
+-e OPTS="--become -v" \
+-e PLAYBOOK_FILE=playbooks/prerequisites.yml \
+{% if is_rhel -%}
+registry.access.redhat.com/openshift3/ose-ansible:{{v_ocp_installer_image}}
+{% else -%}
+docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
+{% endif %}
+
+#############################
+### openshift deployment
+############################
+docker run -u `id -u` \
+-v ${_CURR_DIR}/inventory:/tmp/inventory \
+-v $HOME/.ssh:/opt/app-root/src/.ssh \
+-e INVENTORY_DIR=/tmp/inventory \
+-e OPTS="--become -v" \
+-e PLAYBOOK_FILE=playbooks/deploy_cluster.yml \
+{% if is_rhel -%}
+registry.access.redhat.com/openshift3/ose-ansible:{{v_ocp_installer_image}}
+{% else -%}
+docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
+{% endif %}

@@ -1,0 +1,8 @@
+VG=docker-vg
+{% if cloud_provider == 'aws' %}
+DEVS=/dev/nvme1n1
+{% elif cloud_provider == 'azr' %}
+DEVS=/dev/sdc
+{% else %}
+DEVS=/dev/sdb
+{% endif %}

@@ -1,0 +1,37 @@
+[cols=".<1,.<4,.<4"]
+|===
+|Variable Name | Description |  Default value
+
+|machine_type | The type of Google Compute https://cloud.google.com/compute/docs/machine-types[machine types] to provision | n1-standard-4 
+
+|region| The Google compute https://cloud.google.com/compute/docs/regions-zones/[regions and zones] | asia-south1
+
+|zone|  The Google compute https://cloud.google.com/compute/docs/regions-zones/[regions and zones] | asia-south1-a
+
+|service_account_email| The Google Cloud https://cloud.google.com/compute/docs/access/service-accounts/[Service Accounts] |
+
+|credentials_file| The Google Cloud credentials JSON file corresponding to the `service_account_email` |
+
+|project_id | The Google Cloud Project where the resources will be created |
+
+|image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images] | centos-7
+
+|os_source_image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images], this option allows to use any customized images if needed. Reserved for future |/projects/centos-cloud/global/images/family/centos-7
+
+| private_key_file | The SSH private key file that will be used to SSH into the instances | ~/.ssh/google_compute_engine 
+
+| docker_disk_size | Size of the the Docker Disk in GB, the Google Persistence Disk that will be attached to act as Docker Storage | 100
+
+| is_rhel | Whether the image used is RHEL, this reserved for future use | False
+
+| cloud_user | The user to SSH into the instances|
+
+|===
+
+== References
+
+https://docs.ansible.com/ansible/2.6/scenario_guides/guide_gce.html[Ansible GCP Guide]
+
+https://cloud.google.com/sdk/docs/quickstart-macos
+
+video::tSnzoW4RlaQ[youtube]

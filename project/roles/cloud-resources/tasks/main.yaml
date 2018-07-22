@@ -1,0 +1,24 @@
+---
+- name: Set Extra facts
+  set_fact:
+     hybridcloud_distro_base_dir: "{{playbook_dir}}/out"
+
+- name: Setup Distribution Directories
+  file:
+    path: "{{hybridcloud_distro_base_dir}}/{{item}}/inventory/host_vars"
+    state: directory
+  with_items: "{{ clouds }}"
+  tags: 
+    - prepare
+
+- name: Provision Node in GCP
+  include_tasks: "gcp.yaml"
+  when: ( 'gcp' in clouds  and not aws_rollback )
+    
+- name: Provision Node in AWS
+  include_tasks: "aws.yaml"
+  when: ( 'aws' in clouds  and not aws_rollback )
+
+- name: Provision Node in Azure
+  include_tasks: "azure.yaml"
+  when: ( 'azr' in clouds  and not azure_rollback )

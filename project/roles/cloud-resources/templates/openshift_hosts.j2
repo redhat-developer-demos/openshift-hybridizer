@@ -1,0 +1,27 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+
+[OSEv3:vars]
+# localhost likely doesn't meet the minimum requirements
+openshift_disable_check=disk_availability,memory_availability,docker_image_availability,docker_storage
+openshift_portal_net=172.30.0.0/16
+
+# Type of installation
+openshift_release={{openshift_release}}
+
+# User management
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+openshift_master_manage_htpasswd=false
+
+openshift_enable_service_catalog=false
+
+[masters]
+{{cloud_host_alias}}
+
+[etcd]
+{{cloud_host_alias}}
+
+[nodes]
+{{cloud_host_alias}} openshift_schedulable=true openshift_node_labels="{'region': 'infra', 'zone': 'default'}"

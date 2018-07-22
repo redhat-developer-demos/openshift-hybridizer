@@ -1,0 +1,54 @@
+[cols=".<1,.<4,.<4"]
+|===
+|Variable Name | Description |  Default value
+
+|client_id | Azure Client ID |
+
+|secret | Azure Client Secret |
+
+|subscription_id | Your Azure Subscription ID |
+
+|tenant | Azure Tenant ID |
+
+| private_key_file | The SSH private key file will be required to SSH into the instances | ~/.ssh/azure_id_rsa
+
+|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| ~/.ssh/azure_id_rsa
+
+| location | The https://azure.microsoft.com/en-in/global-infrastructure/regions/[Azure Regions] | southindia
+
+| resource_group | The resource group a.k.a logical group name under which all the resources of the `location` will be grouped. https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview | OpenShift 
+
+| cloud | The Azure Cloud Environment to use, possible values are **AzureCloud** or **AzureChinaCloud** or **AzureUSGovernment** | AzurePublicCloud
+
+| vm_size | The Azure https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs[VM sizes] | Standard_D4_v3
+
+| image | The Azure VM OS Image, defaults to CentOS offered by Rogue Wave (OpenLogic) a|
+[source,yaml]
+----
+  image:
+    offer: CentOS
+    publisher: OpenLogic
+    sku: '7.5'
+    version: latest
+----
+
+| security_group|  Azure Network Security Group that will be by default attached to the network, by default allows Port 22, 80,443 and 8443  | openshift-nsg
+
+| cloud_user | The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have `sudo` rights | admin
+
+| vm_net_name | The virtual private connection (VPC) name | openshift-net
+
+|===
+
+[NOTE]
+====
+To know how to create your Azure Service Principal, refer to https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal[Creating Azure Service Principal].  This helps in setting the variables `client_id`, `tenant` and `secret`.
+
+To know your subscription id check out 
+https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/
+====
+
+===== References
+https://docs.ansible.com/ansible/2.6/scenario_guides/guide_azure.html[Ansible Azure Guide]
+
+video::WygwzN9FfMQ[youtube]

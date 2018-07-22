@@ -1,0 +1,184 @@
+= OpenShift Hybridizer
+// Settings:
+:idprefix:
+:idseparator: -
+ifndef::env-github[]
+:icons: font
+endif::[]
+ifdef::env-github,env-browser[]
+:toc: preamble
+:toclevels: 5
+endif::[]
+ifdef::env-github[]
+:status:
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+(C) 2018 https://developers.redhat.com[Red Hat Developer Experience Team]
+
+//Aliases
+:conum-guard-sh: #
+ifndef::icons[:conum-guard-sh: # #]
+
+:conum-guard-java: //
+ifndef::icons[:conum-guard-java: // //]
+:includedir: ./docs/_includes
+
+// URIs:
+:uri-docker-myrepo-hca: kameshsampath/ansible-runner
+:uri-docker-hca: docker.io/kameshsampath/ansible-runner
+:uri-ansible: https://github.com/ansible/ansible-runner
+:uri-repo: https://github.com/redhat-developer-demos/openshift-hybridizer 
+:uri-repo-file-prefix: {uri-repo}/blob/master/
+:uri-repo-tree-prefix: {uri-repo}/tree/master/
+ifdef::env-github[]
+:uri-repo-file-prefix: link:
+:uri-repo-tree-prefix: link:
+endif::[]
+
+The https://www.ansible.com[Ansible] scripts that can be used to provision an **Hybrid Cloud Environment** and generate the required https://www.ansible.com[Ansible] scripts to deploy **All In One** OpenShift cluster on to it.
+
+[NOTE]
+=====
+Currently supported **Cloud Providers**:
+
+* Azure(**azr**)
+* Amazon(**aws**) 
+* Google Cloud Platform (**gcp**)
+
+=====
+
+== Sources
+
+The sources of these scripts can be downloaded from  {uri-repo}#[GitHub].
+
+Lets clone the sources `git clone {uri-repo}` to a directory on local file system.  For convenience we shall refer to the sources clone directory as `$PROJECT_HOME`.
+
+== Pre-Requisites
+
+* `Docker` installed and available locally, based on your environment have native docker for linux or https://docs.docker.com/docker-for-mac/[Docker for Mac] or https://docs.docker.com/docker-for-windows/[Docker for Windows] installed
+
+* Refer to the following documentation on what are the pre-requisites for each Cloud Provider that are currently supported:
+
+** AWS   - https://docs.ansible.com/ansible/2.5/scenario_guides/guide_aws.html
+
+** Azure - https://docs.ansible.com/ansible/2.5/scenario_guides/guide_azure.html
+
+** Google Cloud Platform -   
+   https://docs.ansible.com/ansible/2.5/scenario_guides/guide_gce.html
+
+[[container-installer]]
+== Installer Image
+
+The installer image is built from {uri-ansible}[Ansible Runner] with need Ansible Cloud modules which are required to provision the cloud resources. The provisioned Cloud resources can then be used to deploy **All In One** OpenShift cluster.
+
+The installer image is available at `{uri-docker-hca}`, to pull it run the command:
+
+[source,sh,subs=attributes+]
+----
+$ docker pull {uri-docker-hca}
+----
+
+== Create Hybrid Cloud Instances
+
+=== Preparation 
+
+Rename `$PROJECT_HOME/env/extravars.example` to `$PROJECT_HOME/env/extravars`, this file will be used to configure your cloud keys and other ansible facts. 
+
+The following Cloud Provider specific sections will detail more on the variables that can defined in `extravars`.
+
+NOTE: The `$PROJECT_HOME/env/extravars` follows YAML convention.
+
+[cols=".<1,.<4,.<4,<5"]
+|===
+|Variable Name |Description |  Default value |  Example
+
+| clouds | The public cloud(s)where to provision| Currently supported values are azr, aws and gcp.
+a| 
+[source,yaml]
+----
+clouds:
+ - gcp
+ - azr
+----
+
+The example configures provisioning of two clouds Azure and Google Cloud Platform
+
+|instance_name | The compute instance name that will be assigned |  openshift-all-in-one |  
+
+|gcp_rollback | Delete all Google Cloud Platform resources that were provisioned  |  False |  
+
+|azure_rollback | Delete all Azure resources that were provisioned  |  False | 
+
+|aws_rollback | Delete all Amazon Web Services resources that were provisioned  |  False | 
+
+|hybrid_cloud_dist_clean | Delete the out directory |  False |
+
+|===
+
+==== Amazon Web Services
+include::{includedir}/aws_vars.adoc[leveloffset: +1]
+
+==== Azure
+include::{includedir}/azr_vars.adoc[leveloffset: +1]
+
+==== Google Cloud 
+include::{includedir}/gcp_vars.adoc[leveloffset: +1]
+
+== Provisioning 
+
+The provisioning consists of two parts:
+
+ - Provision Cloud Resources
+ - Deploying OpenShift 
+
+[[prov-loud-resource]]
+=== Cloud Resources
+
+[source,sh,subs=attributes+]
+----
+$ ./provision.sh 
+----
+
+== DeProvisioning 
+
+The undeploying of Cloud Resources are controlled by three main variables that are defined in `env/extravars`
+
+[source,yaml,subs=attributes+]
+----
+gcp_rollback: False {conum-guard-sh}<1>
+azure_rollback: False {conum-guard-sh}<2>
+aws_rollback: False {conum-guard-sh} <3>
+hybrid_cloud_dist_clean: False {conum-guard-sh} <4>
+----
+
+<1> Set to `True` to undeploy GCP resources
+<2> Set to `True` to undeploy Azure resources
+<3> Set to `True` to undeploy AWS resources
+<4> Set to `True` to delete out directory
+
+[source,sh]
+----
+$ ./deprovision.sh 
+----
+
+[[deploy-openshift]]
+== Deploy OpenShift
+
+After successful provisioning of <<prov-loud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`.
+
+Each cloud directory has as `deploy.sh` which can used to deploy the OpenShift to the respective clouds.
+
+e.g. lets say you have `gcp` in your clouds, the following steps shows how to deploy OpenShift on to your cloud:
+
+[source,sh]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./deploy.sh 
+----

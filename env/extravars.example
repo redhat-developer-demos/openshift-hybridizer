@@ -1,0 +1,97 @@
+---
+ansible_become: no 
+ansible_connection: local
+
+# Recommended to put this file inside vault
+
+# the name of the all in one instance that will be created
+instance_name: "openshift-all-in-one"
+
+# Hybrid Clouds to be used, currently only Google Cloud(gcp), Amazon(aws), and Azure(azr) are supported
+clouds:
+  - gcp 
+  - aws
+  - azure
+
+# Google Cloud Variables
+# https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
+gcp:
+  # https://cloud.google.com/compute/docs/machine-types
+  machine_type: "n1-standard-4" # 4 cpu 15 GB 
+  # https://cloud.google.com/compute/docs/regions-zones/
+  region: "asia-south1"
+  zone: "asia-south1-a"
+  # https://cloud.google.com/compute/docs/access/service-accounts
+  service_account_email: "<your-gce-service-email>"
+  # Download the GCE credentials file JSON
+  # save it under name gce-credentials.json inside ${HOME}/.ssh
+  # or alter this path
+  credentials_file: "{{lookup('env','HOME')}}/.ssh/gce-credentials.json"
+  project_id: "<your-gce-project>"
+  image: "centos-7"
+  os_source_image: '/projects/centos-cloud/global/images/family/centos-7'
+  # The Private key that will be used to SSH into instances
+  private_key_file: "{{ lookup('env','HOME') }}/.ssh/google_compute_engine"
+  docker_disk_size: 100
+  is_rhel: False
+  cloud_user: <your cloud username>
+
+# Amazon Variables
+# https://docs.ansible.com/ansible/latest/scenario_guides/guide_aws.html
+aws:
+  access_key: "<your-aws-access-key>"
+  secret_key: "<your-aws-secret-key>"
+  key_pair_name: "openshift"
+  private_key_file: "{{ lookup('env','HOME') }}/.ssh/aws_openshift.pem"
+  instance_type: "m5.xlarge"
+  # centos 7
+  image: "ami-1780a878" 
+  region: "ap-south-1"  
+  security_group: all-ssh-http-https
+  # user to login to the instances
+  cloud_user: centos 
+  is_rhel: False
+
+# Azure 
+# https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
+# https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/
+azr:
+  client_id: "<client-id or application-id>"
+  secret: "<secret-key>"
+  subscription_id: "<subscription-id>"
+  tenant: "<tenant-id>"
+  # The Private Key to connect to VM and its public key which will be added to authorized keys
+  private_key_file: "{{lookup('env','HOME')}}/.ssh/azure_id_rsa"
+  public_key_file: "{{lookup('file', lookup('env','HOME') + '/.ssh/azure_id_rsa.pub' ) }}"
+  # https://azure.microsoft.com/en-in/global-infrastructure/regions/
+  location: "<the location of the vm>"
+  resource_group: OpenShift
+  cloud: AzureCloud
+  #
+  # https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs
+  vm_size: "Standard_D4_v3"
+  image:
+    offer: CentOS
+    publisher: OpenLogic
+    sku: '7.5'
+    version: latest
+  security_group: openshift-nsg
+  vm_net_name: openshift-net
+  # This user will be the adminUser in Auzre
+  cloud_user: "<your-default-cloud-user>"
+  # Only for RHEL Images
+#   rhn_username: '<your-rhn-subscription-name>'
+#   rhn_password: '<your-rhn-subscription-password>'
+#   rhn_pool_ids: <your-rhn-subscription-pool-ids>
+#   image:
+#     offer: RHEL
+#     publisher: RedHat
+#     sku: '7.5'
+#     version: latest
+
+# Rollback Variables
+
+gcp_rollback: False
+azure_rollback: False
+aws_rollback: False
+hybrid_cloud_dist_clean: False
