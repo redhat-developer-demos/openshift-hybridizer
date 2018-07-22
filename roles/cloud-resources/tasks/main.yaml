@@ -1,7 +1,7 @@
 ---
 - name: Set Extra facts
   set_fact:
-     hybridcloud_distro_base_dir: "{{playbook_dir}}/out"
+     hybridcloud_distro_base_dir: "/runner/inventory"
 
 - name: Setup Distribution Directories
   file:

@@ -14,7 +14,7 @@ docker run  -u `id -u`  \
 {% if cloud_provider == 'azr' %}
 -v ${_CURR_DIR}/azure.conf:/tmp/azure.conf \
 {% endif %}
--v $HOME/.ssh:/opt/app-root/src/.ssh \
+-v ${_CURR_DIR}/project/keys:/opt/app-root/src/.ssh \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=/tmp/hosts_prepare.yaml \
@@ -29,7 +29,7 @@ docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
 ############################
 docker run -u `id -u` \
 -v ${_CURR_DIR}/inventory:/tmp/inventory \
--v $HOME/.ssh:/opt/app-root/src/.ssh \
+-v ${_CURR_DIR}/project/keys:/opt/app-root/src/.ssh \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=playbooks/prerequisites.yml \
@@ -44,7 +44,7 @@ docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
 ############################
 docker run -u `id -u` \
 -v ${_CURR_DIR}/inventory:/tmp/inventory \
--v $HOME/.ssh:/opt/app-root/src/.ssh \
+-v ${_CURR_DIR}/project/keys:/opt/app-root/src/.ssh \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=playbooks/deploy_cluster.yml \

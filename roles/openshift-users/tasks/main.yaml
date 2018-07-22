@@ -1,0 +1,16 @@
+---
+
+- name: Install passlib python module
+  pip:
+    name: "passlib"
+    version: '>=1.6'
+    state: present
+
+- name: Add Users to OpenShift htpasswd file
+  become: yes
+  htpasswd:
+    path: /etc/origin/master/htpasswd
+    name: "{{item.key}}"
+    password: "{{item.value}}"
+    mode: 0640
+  loop: "{{openshift_users}}"

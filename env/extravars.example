@@ -91,7 +91,9 @@ azr:
 
 # Rollback Variables
 
+# Rollback all Google Cloud Platform resources
 gcp_rollback: False
+# Rollback all Azure resources
 azure_rollback: False
+# Rollback all AWS resources
 aws_rollback: False
-hybrid_cloud_dist_clean: False

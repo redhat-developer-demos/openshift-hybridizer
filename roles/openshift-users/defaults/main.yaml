@@ -1,0 +1,3 @@
+openshift_users:
+  - {developer: developer}
+  - {admin: admin}

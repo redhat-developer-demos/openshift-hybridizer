@@ -5,7 +5,7 @@
   gather_facts: no
 
   roles:
-    - cloud-resources
+  - cloud-resources
 
 - name: Azure Reconfigure Network Interface for CentOS Guests
   hosts: "azr-openshift"

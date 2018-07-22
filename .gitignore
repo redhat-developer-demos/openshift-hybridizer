@@ -6,3 +6,5 @@ project/.ansible
 out/**
 !out/.gitkeep
 artifacts/**
+inventory/**
+!inventory/hosts

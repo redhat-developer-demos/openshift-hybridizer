@@ -118,8 +118,6 @@ The example configures provisioning of two clouds Azure and Google Cloud Platfor
 
 |aws_rollback | Delete all Amazon Web Services resources that were provisioned  |  False | 
 
-|hybrid_cloud_dist_clean | Delete the out directory |  False |
-
 |===
 
 ==== Amazon Web Services
@@ -161,7 +159,6 @@ hybrid_cloud_dist_clean: False {conum-guard-sh} <4>
 <1> Set to `True` to undeploy GCP resources
 <2> Set to `True` to undeploy Azure resources
 <3> Set to `True` to undeploy AWS resources
-<4> Set to `True` to delete out directory
 
 [source,sh]
 ----

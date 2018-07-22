@@ -1,5 +1,5 @@
 ---
-- name: Create instance(s)
+- name: Delete instance(s)
   hosts: localhost
   connection: local
   gather_facts: no
