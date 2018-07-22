@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
-<title>Hybrid Cloud OpenShift Provisioner</title>
+<title>OpenShift Hybridizer</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -433,7 +433,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Hybrid Cloud OpenShift Provisioner</h1>
+<h1>OpenShift Hybridizer</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -442,16 +442,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>&#169; 2018 <a href="https://developers.redhat.com">Red Hat Developer Experience Team</a></p>
 </div>
 <div class="paragraph">
-<p>This repository holds the Ansible script that can be used to provision the <strong>Hybrid Cloud Environment</strong> that can then be used to deploy <strong>All In One</strong> OpenShift cluster.</p>
+<p>The <a href="https://www.ansible.com">Ansible</a> scripts that can be used to provision an <strong>Hybrid Cloud Environment</strong> and generate the required <a href="https://www.ansible.com">Ansible</a> scripts to deploy <strong>All In One</strong> OpenShift cluster on to it.</p>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Currently only Azure(azr), Amazon(aws) and Google Cloud Platform (gcp) are supported
+<div class="paragraph">
+<p>Currently supported <strong>Cloud Providers</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Azure(<strong>azr</strong>)</p>
+</li>
+<li>
+<p>Amazon(<strong>aws</strong>)</p>
+</li>
+<li>
+<p>Google Cloud Platform (<strong>gcp</strong>)</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
@@ -462,10 +477,10 @@ Currently only Azure(azr), Amazon(aws) and Google Cloud Platform (gcp) are suppo
 <h2 id="sources">Sources</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sources of these scripts can be downloaded from  <a href="https://github.com/redhat-developer-demos/openshift-on-hybrid-cloud#">GitHub</a>.</p>
+<p>The sources of these scripts can be downloaded from  <a href="https://github.com/redhat-developer-demos/openshift-hybridizer#">GitHub</a>.</p>
 </div>
 <div class="paragraph">
-<p>Lets clone the sources <code>git clone <a href="https://github.com/redhat-developer-demos/openshift-on-hybrid-cloud" class="bare">https://github.com/redhat-developer-demos/openshift-on-hybrid-cloud</a></code> to a directory on local file system.  For convenience we shall refer to the sources clone directory as <code>$PROJECT_HOME</code>.</p>
+<p>Lets clone the sources <code>git clone <a href="https://github.com/redhat-developer-demos/openshift-hybridizer" class="bare">https://github.com/redhat-developer-demos/openshift-hybridizer</a></code> to a directory on local file system.  For convenience we shall refer to the sources clone directory as <code>$PROJECT_HOME</code>.</p>
 </div>
 </div>
 </div>
@@ -475,66 +490,55 @@ Currently only Azure(azr), Amazon(aws) and Google Cloud Platform (gcp) are suppo
 <div class="ulist">
 <ul>
 <li>
-<p><code>Docker</code> installed and available locally</p>
+<p><code>Docker</code> installed and available locally, based on your environment have native docker for linux or <a href="https://docs.docker.com/docker-for-mac/">Docker for Mac</a> or <a href="https://docs.docker.com/docker-for-windows/">Docker for Windows</a> installed</p>
 </li>
 <li>
-<p><a href="https://ansible.com">Ansible</a>, only if you plan to run all the scripts from local machine, refer to  <a href="#local-ansible">Local Ansible Setup</a> for more details on the setup.</p>
+<p>Refer to the following documentation on what are the pre-requisites for each Cloud Provider that are currently supported:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AWS   - <a href="https://docs.ansible.com/ansible/2.5/scenario_guides/guide_aws.html" class="bare">https://docs.ansible.com/ansible/2.5/scenario_guides/guide_aws.html</a></p>
+</li>
+<li>
+<p>Azure - <a href="https://docs.ansible.com/ansible/2.5/scenario_guides/guide_azure.html" class="bare">https://docs.ansible.com/ansible/2.5/scenario_guides/guide_azure.html</a></p>
+</li>
+<li>
+<p>Google Cloud Platform -
+<a href="https://docs.ansible.com/ansible/2.5/scenario_guides/guide_gce.html" class="bare">https://docs.ansible.com/ansible/2.5/scenario_guides/guide_gce.html</a></p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="container-installer">Installer Image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The installer image is built from <a href="https://github.com/ansible/ansible-runner">Ansible Runner</a> with need Ansible Cloud modules which are required to provision the cloud resources. The provisioned Cloud resources can then be used to deploy <strong>All In One</strong> OpenShift cluster.</p>
+</div>
+<div class="paragraph">
+<p>The installer image is available at <code>docker.io/kameshsampath/ansible-runner</code>, to pull it run the command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sh" data-lang="sh">$ docker pull docker.io/kameshsampath/ansible-runner</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-hybrid-cloud-instances">Create Hybrid Cloud Instances</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="container-installer">Installer Image</h3>
+<h3 id="preparation">Preparation</h3>
 <div class="paragraph">
-<p>The container image has the necessary OS packages and <a href="https://ansible.com">Ansible</a> modules that are required to provision all the cloud resources. The provisioned Cloud resources can then be used to deploy <strong>All In One</strong> OpenShift cluster.</p>
-</div>
-<div class="paragraph">
-<p>The installer image is available at <code>docker.io/kameshsampath/hybrid-cloud-ansible</code>, to pull it run the command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-sh" data-lang="sh">$ docker pull docker.io/kameshsampath/hybrid-cloud-ansible</code></pre>
-</div>
+<p>Rename <code>$PROJECT_HOME/env/extravars.example</code> to <code>$PROJECT_HOME/env/extravars</code>, this file will be used to configure your cloud keys and other ansible facts.</p>
 </div>
 <div class="paragraph">
-<p>(OR)</p>
-</div>
-<div class="paragraph">
-<p>You can build it locally via the Dockerfile present in <code>$PROJECT_HOME/installer</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-sh" data-lang="sh">$ cd $PROJECT_HOME/installer
-$ docker build -t kameshsampath/hybrid-cloud-ansible --rm . # <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>If you change the tag here, then you need to update the docker run commands to use this docker image with right tags</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="local-ansible">Local Ansible Setup</h3>
-<div class="paragraph">
-<p>Its recommended to have <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> and <a href="http://virtualenvwrapper.readthedocs.io/en/latest/">virtualenvwrapper</a>. Once these tools are installed, its easy to setup the ansible environment by running the following commands:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-sh" data-lang="sh">$ cd $PROJECT_HOME
-$ mkvirtualenv  openshift-on-hybrid-cloud
-$ pip install -r requirements.txt  # <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This setups all the required ansible modules that are used to interact with AWS/GCP/Azure clouds</td>
-</tr>
-</table>
+<p>The following Cloud Provider specific sections will detail more on the variables that can defined in <code>extravars</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -543,22 +547,11 @@ $ pip install -r requirements.txt  # <i class="conum" data-value="1"></i><b>(1)<
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Its preferred to use Ansible version 2.6.1 for the cloud provisioning as it has lot of improvements from previous versions of the cloud modules that makes the provisioning easier.
+The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="create-hybrid-cloud-instances">Create Hybrid Cloud Instances</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Copy the <code>cloud-vars.example.yaml</code> to file called <code>cloud-vars.yaml</code>, this file will be used to configure your cloud keys and other facts. The following Cloud Provider specific sections will detail more on the variables that are defined in <code>cloud-vars.yaml</code>.</p>
-</div>
-<div class="sect2">
-<h3 id="cloud-variables">Cloud Variables</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 7.1428%;">
@@ -594,6 +587,30 @@ Its preferred to use Ansible version 2.6.1 for the cloud provisioning as it has 
 <td class="tableblock halign-left valign-top"><p class="tableblock">instance_name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The compute instance name that will be assigned</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">openshift-all-in-one</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gcp_rollback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete all Google Cloud Platform resources that were provisioned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">azure_rollback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete all Azure resources that were provisioned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aws_rollback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete all Amazon Web Services resources that were provisioned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hybrid_cloud_dist_clean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete the out directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -890,6 +907,11 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the image used is RHEL, this reserved for future use</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -901,6 +923,9 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <div class="sectionbody">
 <div class="paragraph">
 <p><a href="https://docs.ansible.com/ansible/2.6/scenario_guides/guide_gce.html">Ansible GCP Guide</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://cloud.google.com/sdk/docs/quickstart-macos" class="bare">https://cloud.google.com/sdk/docs/quickstart-macos</a></p>
 </div>
 <div class="videoblock">
 <div class="content">
@@ -927,26 +952,6 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 </div>
 <div class="sect2">
 <h3 id="prov-loud-resource">Cloud Resources</h3>
-<div class="sect3">
-<h4 id="using-installer-image">Using Installer Image</h4>
-<div class="paragraph">
-<p>With <strong>$CURR_DIR</strong> usually the <code>$PROJECT_HOME</code> variable pointing to the directory where you have created <code>cloud-vars.yaml</code> file the provisioning of the cloud instances could be done as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-sh" data-lang="sh">$ docker run -t -u `id -u` \
- -v $HOME/.ssh/:/opt/app-root/src/.ssh/ \
- -v ${CURR_DIR}/out:/opt/app-root/src/playbooks/out \
- -v ${CURR_DIR}/cloud-vars.yaml:/opt/app-root/src/playbooks/cloud-vars.yaml:Z,ro \
- -e OPTS="-v" \
- -e PLAYBOOK_FILE=playbooks/provision-openshift-nodes.yaml \
- -e CLOUD_VARS_FILE=${CURR_DIR}/cloud_vars.yaml \
- docker.io/kameshsampath/hybrid-cloud-ansible</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="using-local-ansible">Using Local Ansible</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-sh" data-lang="sh">$ ./provision.sh</code></pre>
@@ -955,34 +960,43 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="deprovisioning">DeProvisioning</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="using-installer-image-2">Using Installer Image</h3>
 <div class="paragraph">
-<p>With $CURR_DIR variable pointing to the directory where you have created <code>cloud-vars.yaml</code> file the deprovisioning of the cloud instances could be done as:</p>
+<p>The undeploying of Cloud Resources are controlled by three main variables that are defined in <code>env/extravars</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-sh" data-lang="sh">$ docker run -t -u `id -u` \
- -v $HOME/.ssh/:/opt/app-root/src/.ssh/ \
- -v ${CURR_DIR}/out:/opt/app-root/src/playbooks/out \
- -v ${CURR_DIR}/cloud-vars.yaml:/opt/app-root/src/playbooks/cloud-vars.yaml:Z,ro \
- -e OPTS="-v" \
- -e PLAYBOOK_FILE=playbooks/deprovision-openshift-nodes.yaml \
- -e CLOUD_VARS_FILE=${CURR_DIR}/cloud_vars.yaml \
- docker.io/kameshsampath/hybrid-cloud-ansible</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">gcp_rollback: False <i class="conum" data-value="1"></i><b>(1)</b>
+azure_rollback: False <i class="conum" data-value="2"></i><b>(2)</b>
+aws_rollback: False <i class="conum" data-value="3"></i><b>(3)</b>
+hybrid_cloud_dist_clean: False <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Set to <code>True</code> to undeploy GCP resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Set to <code>True</code> to undeploy Azure resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Set to <code>True</code> to undeploy AWS resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Set to <code>True</code> to delete out directory</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="using-local-ansible-2">Using Local Ansible</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-sh" data-lang="sh">$ ./deprovision.sh</code></pre>
-</div>
 </div>
 </div>
 </div>
@@ -1010,7 +1024,7 @@ $ ./deploy.sh</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-07-21 21:06:11 IST
+Last updated 2018-07-22 17:58:45 IST
 </div>
 </div>
 </body>

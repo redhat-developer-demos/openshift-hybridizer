@@ -1,6 +1,7 @@
 env/envvars
 env/extravars
 project/keys
+!project/keys/README.md
 project/.ansible
 out/**
 !out/.gitkeep
