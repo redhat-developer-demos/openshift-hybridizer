@@ -4,4 +4,4 @@
 # Private Key to use : {{private_key_file}}
 # Sudo user : {{cloud_user}}
 set - e
-ssh -i {{private_key_file}} {{cloud_user}}@{{public_ip}}
+ssh -i {{lookup('env','PROJECT_DIR')}}/{{private_key_file}} {{cloud_user}}@{{public_ip}}

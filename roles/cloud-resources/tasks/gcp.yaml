@@ -4,6 +4,34 @@
   debug:
    msg: "Provisioning GCE Instances"
 
+#############################################################################
+## Security KeyPair
+#############################################################################
+- name: "Check that the {{gcp.private_key_file}} exists"
+  stat:
+    path: "{{gcp.private_key_file}}"
+  register: gcpsshfile
+
+- name: "GCP SSH Key Pair"
+  shell: |
+    ssh-keygen -t rsa -N '' -f "{{gcp.private_key_file}}"
+  when: gcpsshfile.stat.exists == False
+  register: gcp_sshkey
+  tags:
+    - cloud-gcp
+
+- name: GCP SSH Public Key Metadata
+  set_fact: 
+     ssh_public_key_metadata: "{{ lookup('file',gcp.public_key_file) + ' ' + gcp.cloud_user | trim }}"
+
+# - debug:
+#     msg: "{{ssh_public_key_metadata}}"
+#   when: gcp_sshkey is changed
+
+#############################################################################
+## Network
+#############################################################################
+
 - name: GCE Create Static IP
   gce_eip:
     service_account_email: "{{ gcp.service_account_email }}"
@@ -27,6 +55,9 @@
     zone: "{{gcp.zone}}"
     disk_size: "20"
     persistent_boot_disk: "True"
+    metadata: 
+      ssh-keys:
+        - "{{gcp.cloud_user}}:{{ssh_public_key_metadata}}"
     service_account_permissions:
       - logging-write
       - monitoring

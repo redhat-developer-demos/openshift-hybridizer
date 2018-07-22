@@ -168,7 +168,7 @@ $ ./deprovision.sh
 [[deploy-openshift]]
 == Deploy OpenShift
 
-After successful provisioning of <<prov-loud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`.
+After successful provisioning of <<prov-cloud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`.
 
 Each cloud directory has as `deploy.sh` which can used to deploy the OpenShift to the respective clouds.
 

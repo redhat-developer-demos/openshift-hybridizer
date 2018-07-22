@@ -11,7 +11,7 @@
   tags:
     -"cloud-{{cloud_host_alias}}"
 
-- name: "{{cloud_provider|upper}} Setup Azure Host Variables"
+- name: "{{cloud_provider|upper}} Setup Host Variables"
   template:
     src: host_vars.yaml.j2
     dest: "{{hybricloud_inventory_dir}}/host_vars/{{cloud_host_alias}}.yaml"

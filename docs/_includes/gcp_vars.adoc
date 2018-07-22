@@ -14,6 +14,10 @@
 
 |project_id | The Google Cloud Project where the resources will be created |
 
+| private_key_file | The SSH private key file will be required to SSH into the instances, if the file does not exists it will created | $PROJECT_HOME/keys/gce_idrsa
+
+|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| $PROJECT_HOME/keys/gce_idrsa.pub
+
 |image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images] | centos-7
 
 |os_source_image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images], this option allows to use any customized images if needed. Reserved for future |/projects/centos-cloud/global/images/family/centos-7
