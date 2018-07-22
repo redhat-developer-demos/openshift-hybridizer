@@ -24,14 +24,14 @@ gcp:
   # https://cloud.google.com/compute/docs/access/service-accounts
   service_account_email: "<your-gce-service-email>"
   # Download the GCE credentials file JSON
-  # save it under name gce-credentials.json inside ${HOME}/.ssh
+  # save it under name gce-key.json inside $PROJECT_HOME/project/keys
   # or alter this path
-  credentials_file: "{{lookup('env','HOME')}}/.ssh/gce-credentials.json"
+  credentials_file: keys/gce-key.json
   project_id: "<your-gce-project>"
   image: "centos-7"
   os_source_image: '/projects/centos-cloud/global/images/family/centos-7'
   # The Private key that will be used to SSH into instances
-  private_key_file: "{{ lookup('env','HOME') }}/.ssh/google_compute_engine"
+  private_key_file: keys/google_compute_engine
   docker_disk_size: 100
   is_rhel: False
   cloud_user: <your cloud username>
@@ -42,7 +42,8 @@ aws:
   access_key: "<your-aws-access-key>"
   secret_key: "<your-aws-secret-key>"
   key_pair_name: "openshift"
-  private_key_file: "{{ lookup('env','HOME') }}/.ssh/aws_openshift.pem"
+  # # keys == $PROJECT_HOME/project/keys
+  private_key_file: keys/aws_openshift.pem
   instance_type: "m5.xlarge"
   # centos 7
   image: "ami-1780a878" 
@@ -61,8 +62,9 @@ azr:
   subscription_id: "<subscription-id>"
   tenant: "<tenant-id>"
   # The Private Key to connect to VM and its public key which will be added to authorized keys
-  private_key_file: "{{lookup('env','HOME')}}/.ssh/azure_id_rsa"
-  public_key_file: "{{lookup('file', lookup('env','HOME') + '/.ssh/azure_id_rsa.pub' ) }}"
+  # keys == $PROJECT_HOME/project/keys
+  private_key_file: keys/azure_id_rsa
+  public_key_file: keys/azure_id_rsa.pub
   # https://azure.microsoft.com/en-in/global-infrastructure/regions/
   location: "<the location of the vm>"
   resource_group: OpenShift
