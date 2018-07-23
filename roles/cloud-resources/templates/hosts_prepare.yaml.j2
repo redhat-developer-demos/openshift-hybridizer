@@ -2,11 +2,50 @@
 
 - hosts:  
    - {{cloud_host_alias}}
-  
-  vars: {}
-
-  tasks: 
  
+  tasks: 
+  
+  # enable the default eth0 network to be NM Controlled
+  {% if cloud_provider == 'azr' and azr.image.offer == 'CentOS' -%}
+  - name: Enable NM_CONTROLLED
+    lineinfile:
+      regexp: '^(NM_CONTROLLED=)(no)$'
+      backrefs: yes
+      path: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: '\1yes'  
+    become: yes
+    register: nmcontolled_changed
+
+  - name: restart azure vm
+    azure_rm_virtualmachine:
+      name: "{{instance_name}}"
+      client_id: "{{azr.client_id}}"
+      secret: "{{azr.secret}}"
+      subscription_id: "{{azr.subscription_id}}"
+      tenant: "{{azr.tenant}}"
+      location: "{{azr.location}}"      
+      resource_group: "{{azr.resource_group}}"
+      restarted: yes
+    when: nmcontolled_changed is changed
+    delegate_to: localhost
+
+  - name: wait for azure restart
+    local_action: shell ansible -u {{ azr.cloud_user }} -m ping {% raw -%}{{ inventory_hostname }}{% endraw %}
+    register: result
+    until: result.rc == 0
+    retries: 30
+    delay: 10
+    when: nmcontolled_changed is changed
+
+  - name: check eth0 is available
+    shell: nmcli c s
+    register: nmcli_out 
+    when: nmcontolled_changed is changed
+
+  # TODO to evaluate change or failure
+  - debug: msg={%- raw %} "{{nmcli_out}}"{% endraw %} 
+  {% endif %}
+
   {% if is_rhel -%}
   - name: Subscribe to RedHat 
     redhat_subscription:

@@ -225,3 +225,10 @@
     hybridcloud_distro_dir: "{{hybridcloud_distro_base_dir}}/azr"
   tags:
     - cloud-azr
+
+- name: Azure Cloud Provider Configuration
+  template:
+    src: azure.conf.j2
+    dest: "{{hybridcloud_distro_base_dir}}/azr/azure.conf"
+  tags:
+    - cloud-azr
