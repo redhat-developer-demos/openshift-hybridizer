@@ -10,9 +10,11 @@
 
 |tenant | Azure Tenant ID |
 
-| private_key_file | The SSH private key file will be required to SSH into the instances | ~/.ssh/azure_id_rsa
+| cloud_user | The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have `sudo` rights | centos
 
-|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| ~/.ssh/azure_id_rsa
+| private_key_file | The SSH private key file will be required to SSH into the instances, if the file does not exists it will created | $PROJECT_HOME/keys/azure_id_rsa
+
+|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| $PROJECT_HOME/keys/azure_id_rsa.pub
 
 | location | The https://azure.microsoft.com/en-in/global-infrastructure/regions/[Azure Regions] | southindia
 
@@ -33,8 +35,6 @@
 ----
 
 | security_group|  Azure Network Security Group that will be by default attached to the network, by default allows Port 22, 80,443 and 8443  | openshift-nsg
-
-| cloud_user | The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have `sudo` rights | admin
 
 | vm_net_name | The virtual private connection (VPC) name | openshift-net
 

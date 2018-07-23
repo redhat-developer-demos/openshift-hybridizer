@@ -576,7 +576,8 @@ The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">clouds:
  - gcp
- - azr</code></pre>
+ - azr
+ - aws</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -604,12 +605,6 @@ The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">aws_rollback</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete all Amazon Web Services resources that were provisioned</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hybrid_cloud_dist_clean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete the out directory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -643,18 +638,18 @@ The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">key_pair_name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH Key pair that will be created, this key will be added</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to <code>~/.ssh/authorized_keys</code> of the <code>cloud_user</code> in the ec2 instances</p></td>
-</tr>
-<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH Key pair that will be created, this key will be added to <code>~/.ssh/authorized_keys</code> of the <code>cloud_user</code> in the ec2 instances</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">openshift</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">private_key_file</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">centos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private_key_file</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH private key file that gets saved after keypair creation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">aws_openshift.pem</p></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">instance_type</p></td>
@@ -677,11 +672,6 @@ The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 <td class="tableblock halign-left valign-top"><p class="tableblock">all-ssh-http-https</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">centos</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">is_rhel</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the AMI used is RHEL, this reserved for future use</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
@@ -695,7 +685,7 @@ The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe
+When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  <a href="https://wiki.centos.org/Cloud/AWS" class="bare">https://wiki.centos.org/Cloud/AWS</a>
 </td>
 </tr>
 </table>
@@ -747,14 +737,19 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have <code>sudo</code> rights</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">centos</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">private_key_file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH private key file will be required to SSH into the instances</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~/.ssh/azure_id_rsa</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH private key file will be required to SSH into the instances, if the file does not exists it will created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$PROJECT_HOME/keys/azure_id_rsa</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">public_key_file</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH Public Key of the <code>private_key_file</code> that will be added to <code>~/.ssh/authorized_keys</code> of the <code>cloud_user</code> in the Azure VM instances</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~/.ssh/azure_id_rsa</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$PROJECT_HOME/keys/azure_id_rsa.pub</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">location</p></td>
@@ -793,11 +788,6 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"><p class="tableblock">security_group</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Azure Network Security Group that will be by default attached to the network, by default allows Port 22, 80,443 and 8443</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">openshift-nsg</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have <code>sudo</code> rights</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">admin</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">vm_net_name</p></td>
@@ -853,9 +843,19 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">machine_type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of Google Compute <a href="https://cloud.google.com/compute/docs/machine-types">machine types</a> to provision</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">n1-standard-4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">service_account_email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud <a href="https://cloud.google.com/compute/docs/access/service-accounts/">Service Accounts</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">credentials_file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud credentials JSON file corresponding to the <code>service_account_email</code> .  Refer to <a href="#create-gce-creds">Creating GCE Credentials</a> on how to create one for your project</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project_id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud Project where the resources will be created</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">region</p></td>
@@ -868,19 +868,24 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"><p class="tableblock">asia-south1-a</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">service_account_email</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud <a href="https://cloud.google.com/compute/docs/access/service-accounts/">Service Accounts</a></p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">centos</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">credentials_file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud credentials JSON file corresponding to the <code>service_account_email</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private_key_file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH private key file will be required to SSH into the instances, if the file does not exists it will created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$PROJECT_HOME/keys/gce_idrsa</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">project_id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Google Cloud Project where the resources will be created</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">public_key_file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH Public Key of the <code>private_key_file</code> that will be added to <code>~/.ssh/authorized_keys</code> of the <code>cloud_user</code> in the GCP VM instances</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$PROJECT_HOME/keys/gce_idrsa.pub</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">machine_type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of Google Compute <a href="https://cloud.google.com/compute/docs/machine-types">machine types</a> to provision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n1-standard-4</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
@@ -893,11 +898,6 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"><p class="tableblock">/projects/centos-cloud/global/images/family/centos-7</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">private_key_file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The SSH private key file that will be used to SSH into the instances</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">~/.ssh/google_compute_engine</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">docker_disk_size</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Size of the the Docker Disk in GB, the Google Persistence Disk that will be attached to act as Docker Storage</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
@@ -907,13 +907,48 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether the image used is RHEL, this reserved for future use</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cloud_user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The user to SSH into the instances</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-gce-creds">Creating GCE Credentials</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sh" data-lang="sh">#!/bin/bash
+
+# Select the project
+$ gcloud projects list
+
+# GCP project where resources will be created assign the PROJECT_NAME to variable called IAM_PROJECT
+$ IAM_PROJECT="&lt;project-from-list&gt;"
+# The Google Service Account Name
+$ IAM_SA_NAME="vm-instance-admin"
+
+# Step 1: Create a Service Account
+$ gcloud iam service-accounts create $IAM_SA_NAME \
+            --display-name "Projects VM Instance Admin"
+
+# Step 2: Create the Service Account Key
+
+$ IAM_ACCOUNT="${IAM_SA_NAME}@${IAM_PROJECT}.iam.gserviceaccount.com"
+
+$ gcloud iam service-accounts keys create \
+            --iam-account $IAM_ACCOUNT \ gce-key.json
+
+# Step 3: Grant VM instance Admin role
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/compute.instanceAdmin.v1
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/compute.networkAdmin
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/iam.serviceAccountUser</code></pre>
 </div>
 </div>
 </div>
@@ -951,7 +986,7 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 </ul>
 </div>
 <div class="sect2">
-<h3 id="prov-loud-resource">Cloud Resources</h3>
+<h3 id="prov-cloud-resource">Cloud Resources</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-sh" data-lang="sh">$ ./provision.sh</code></pre>
@@ -970,8 +1005,7 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">gcp_rollback: False <i class="conum" data-value="1"></i><b>(1)</b>
 azure_rollback: False <i class="conum" data-value="2"></i><b>(2)</b>
-aws_rollback: False <i class="conum" data-value="3"></i><b>(3)</b>
-hybrid_cloud_dist_clean: False <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+aws_rollback: False <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -988,10 +1022,6 @@ hybrid_cloud_dist_clean: False <i class="conum" data-value="4"></i><b>(4)</b></c
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>Set to <code>True</code> to undeploy AWS resources</td>
 </tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Set to <code>True</code> to delete out directory</td>
-</tr>
 </table>
 </div>
 <div class="listingblock">
@@ -1005,13 +1035,60 @@ hybrid_cloud_dist_clean: False <i class="conum" data-value="4"></i><b>(4)</b></c
 <h2 id="deploy-openshift">Deploy OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After successful provisioning of <a href="#prov-loud-resource">Cloud Resources</a>, there should be one directory per cloud created under <code>$PROJECT_HOME/out</code>.</p>
+<p>After successful provisioning of <a href="#prov-cloud-resource">Cloud Resources</a>, there should be one directory per cloud created under <code>$PROJECT_HOME/out</code>.</p>
 </div>
 <div class="paragraph">
-<p>Each cloud directory has as <code>deploy.sh</code> which can used to deploy the OpenShift to the respective clouds.</p>
+<p>e.g. The following shows the directory tree for Azure and GCP</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sh" data-lang="sh"> out
+   |-azr
+   |---inventory <i class="conum" data-value="1"></i><b>(1)</b>
+   |-----host_vars <i class="conum" data-value="2"></i><b>(2)</b>
+   |- connect.sh <i class="conum" data-value="3"></i><b>(3)</b>
+   |- host_prepare.yaml <i class="conum" data-value="4"></i><b>(4)</b>
+   |- deploy.sh <i class="conum" data-value="5"></i><b>(5)</b>
+   |- docker-storage-setup <i class="conum" data-value="6"></i><b>(6)</b>
+   |-gcp
+   |---inventory
+   |-----host_vars
+   |- connect.sh
+   |- host_prepare.yaml
+   |- deploy.sh
+   |- docker-storage-setup</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The cloud specific Ansible Inventory directory</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>host_vars, the Ansible host variables  for the cloud provider</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The SSH connect utility, this has the IP address of the OpenShift</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The Cloud Host OpenShift Deployment preparation tasks</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The OpenShift Deploy script</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The Docker storage setup file</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>e.g. lets say you have <code>gcp</code> in your clouds, the following steps shows how to deploy OpenShift on to your cloud:</p>
+<p>e.g. Lets say you want to deploy OpenShit on to your Google Cloud Platform(gcp), run the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1024,7 +1101,7 @@ $ ./deploy.sh</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-07-22 17:58:45 IST
+Last updated 2018-07-23 22:44:19 IST
 </div>
 </div>
 </body>

@@ -2,35 +2,72 @@
 |===
 |Variable Name | Description |  Default value
 
-|machine_type | The type of Google Compute https://cloud.google.com/compute/docs/machine-types[machine types] to provision | n1-standard-4 
+|service_account_email| The Google Cloud https://cloud.google.com/compute/docs/access/service-accounts/[Service Accounts] |
+
+|credentials_file| The Google Cloud credentials JSON file corresponding to the `service_account_email` .  Refer to <<create-gce-creds>> on how to create one for your project|
+
+|project_id | The Google Cloud Project where the resources will be created |
 
 |region| The Google compute https://cloud.google.com/compute/docs/regions-zones/[regions and zones] | asia-south1
 
 |zone|  The Google compute https://cloud.google.com/compute/docs/regions-zones/[regions and zones] | asia-south1-a
 
-|service_account_email| The Google Cloud https://cloud.google.com/compute/docs/access/service-accounts/[Service Accounts] |
-
-|credentials_file| The Google Cloud credentials JSON file corresponding to the `service_account_email` |
-
-|project_id | The Google Cloud Project where the resources will be created |
+| cloud_user | The user to SSH into the instances| centos
 
 | private_key_file | The SSH private key file will be required to SSH into the instances, if the file does not exists it will created | $PROJECT_HOME/keys/gce_idrsa
 
-|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| $PROJECT_HOME/keys/gce_idrsa.pub
+|public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the GCP VM instances| $PROJECT_HOME/keys/gce_idrsa.pub
+
+|machine_type | The type of Google Compute https://cloud.google.com/compute/docs/machine-types[machine types] to provision | n1-standard-4 
 
 |image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images] | centos-7
 
 |os_source_image| The Google compute OS https://cloud.google.com/compute/docs/images#os-compute-support[public images], this option allows to use any customized images if needed. Reserved for future |/projects/centos-cloud/global/images/family/centos-7
 
-| private_key_file | The SSH private key file that will be used to SSH into the instances | ~/.ssh/google_compute_engine 
-
 | docker_disk_size | Size of the the Docker Disk in GB, the Google Persistence Disk that will be attached to act as Docker Storage | 100
 
 | is_rhel | Whether the image used is RHEL, this reserved for future use | False
 
-| cloud_user | The user to SSH into the instances|
-
 |===
+
+[[create-gce-creds]]
+== Creating GCE Credentials
+
+[source,sh,subs=attributes+]
+----
+
+#!/bin/bash
+
+# Select the project
+$ gcloud projects list 
+
+# GCP project where resources will be created assign the PROJECT_NAME to variable called IAM_PROJECT
+$ IAM_PROJECT="<project-from-list>"
+# The Google Service Account Name
+$ IAM_SA_NAME="vm-instance-admin"
+
+# Step 1: Create a Service Account 
+$ gcloud iam service-accounts create $IAM_SA_NAME \
+            --display-name "Projects VM Instance Admin"
+
+# Step 2: Create the Service Account Key
+
+$ IAM_ACCOUNT="${IAM_SA_NAME}@${IAM_PROJECT}.iam.gserviceaccount.com"
+
+$ gcloud iam service-accounts keys create \
+            --iam-account $IAM_ACCOUNT \ gce-key.json
+
+# Step 3: Grant VM instance Admin role 
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/compute.instanceAdmin.v1
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/compute.networkAdmin
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/iam.serviceAccountUser
+----
 
 == References
 

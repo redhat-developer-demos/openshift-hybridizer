@@ -2,74 +2,110 @@
 ansible_become: no 
 ansible_connection: local
 
-# Recommended to put this file inside vault
+# Recommended to put this file inside vault 
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html
+
+# PROJECT_HOME is the directory where the sources are cloned 
 
 # the name of the all in one instance that will be created
 instance_name: "openshift-all-in-one"
 
-# Hybrid Clouds to be used, currently only Google Cloud(gcp), Amazon(aws), and Azure(azr) are supported
+# Hybrid Clouds where the resources will be provisioned
+# Currently only Google Cloud(gcp), Amazon(aws), and Azure(azr) are supported
 clouds:
   - gcp 
   - aws
-  - azure
+  - azr
+####################################################################################
+# Rollback Variables
+# Rollback all Google Cloud Platform resources
+gcp_rollback: False
+# Rollback all Azure resources
+azure_rollback: False
+# Rollback all AWS resources
+aws_rollback: False
+####################################################################################
 
+####################################################################################
+#
 # Google Cloud Variables
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html
+####################################################################################
 gcp:
-  # https://cloud.google.com/compute/docs/machine-types
-  machine_type: "n1-standard-4" # 4 cpu 15 GB 
-  # https://cloud.google.com/compute/docs/regions-zones/
-  region: "asia-south1"
-  zone: "asia-south1-a"
   # https://cloud.google.com/compute/docs/access/service-accounts
   service_account_email: "<your-gce-service-email>"
   # Download the GCE credentials file JSON
   # save it under name gce-key.json inside $PROJECT_HOME/project/keys
-  # or alter this path
+  # IMPORTANT: If you change this path then you might need to alter the scripts
   credentials_file: keys/gce-key.json
   project_id: "<your-gce-project>"
+  # https://cloud.google.com/compute/docs/regions-zones/
+  region: "asia-south1"
+  zone: "asia-south1-a"  
+  # This user will have sudo right and the public key (public_key_file) of private_key_file 
+  # will be added to the users .ssh/authorized_keys
+  cloud_user: centos
+  # The Private key that will be used to SSH into instances
+  # If these files are not present the will be generated
+  private_key_file: keys/gce_idrsa
+  public_key_file: keys/gce_idrsa.pub
+  # https://cloud.google.com/compute/docs/machine-types
+  machine_type: "n1-standard-4" # 4 cpu 15 GB 
   image: "centos-7"
   os_source_image: '/projects/centos-cloud/global/images/family/centos-7'
-  # The Private key that will be used to SSH into instances
-  private_key_file: keys/google_compute_engine
+  #Size in GB
   docker_disk_size: 100
   is_rhel: False
-  cloud_user: <your cloud username>
 
+####################################################################################
+#
 # Amazon Variables
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_aws.html
+#
+####################################################################################
 aws:
   access_key: "<your-aws-access-key>"
   secret_key: "<your-aws-secret-key>"
+  # This user will have passwordless sudo rights and the public key of private_key_file 
+  # will be added to the users .ssh/authorized_keys
+  cloud_user: centos 
+  # the SSH Key Pair Name that will provide access to instances
   key_pair_name: "openshift"
-  # # keys == $PROJECT_HOME/project/keys
+  # keys directory corresponds to  $PROJECT_HOME/project/keys
   private_key_file: keys/aws_openshift.pem
+  https://aws.amazon.com/ec2/instance-types/
   instance_type: "m5.xlarge"
-  # centos 7
+  # centos 7, Please check with https://wiki.centos.org/Cloud/AWS to find AMI ids for your
+  # region, https://aws.amazon.com/marketplace/pp/B00O7WM7QW
   image: "ami-1780a878" 
+  #https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
   region: "ap-south-1"  
   security_group: all-ssh-http-https
-  # user to login to the instances
-  cloud_user: centos 
   is_rhel: False
-
+##########################################################################################################
+#
 # Azure 
 # https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
 # https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/
+###########################################################################################################
 azr:
   client_id: "<client-id or application-id>"
   secret: "<secret-key>"
   subscription_id: "<subscription-id>"
   tenant: "<tenant-id>"
+  # This user will have sudo right and the public key (public_key_file) of private_key_file 
+  # will be added to the users .ssh/authorized_keys
+  cloud_user: centos
   # The Private Key to connect to VM and its public key which will be added to authorized keys
   # keys == $PROJECT_HOME/project/keys
+  # The Private key that will be used to SSH into instances
+  # If these files are not present the will be generated
   private_key_file: keys/azure_id_rsa
   public_key_file: keys/azure_id_rsa.pub
   # https://azure.microsoft.com/en-in/global-infrastructure/regions/
   location: "<the location of the vm>"
   resource_group: OpenShift
   cloud: AzureCloud
-  #
   # https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs
   vm_size: "Standard_D4_v3"
   image:
@@ -79,9 +115,8 @@ azr:
     version: latest
   security_group: openshift-nsg
   vm_net_name: openshift-net
-  # This user will be the adminUser in Auzre
-  cloud_user: "<your-default-cloud-user>"
-  # Only for RHEL Images
+
+#  # Only for RHEL Images
 #   rhn_username: '<your-rhn-subscription-name>'
 #   rhn_password: '<your-rhn-subscription-password>'
 #   rhn_pool_ids: <your-rhn-subscription-pool-ids>
@@ -90,12 +125,3 @@ azr:
 #     publisher: RedHat
 #     sku: '7.5'
 #     version: latest
-
-# Rollback Variables
-
-# Rollback all Google Cloud Platform resources
-gcp_rollback: False
-# Rollback all Azure resources
-azure_rollback: False
-# Rollback all AWS resources
-aws_rollback: False

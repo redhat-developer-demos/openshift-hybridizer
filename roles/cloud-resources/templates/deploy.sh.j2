@@ -8,13 +8,13 @@ _CURR_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 ### Prepare for openshift
 ############################
 docker run  -u `id -u`  \
--v ${_CURR_DIR}/inventory:/tmp/inventory:z \
--v ${_CURR_DIR}/docker-storage-setup:/tmp/docker-storage-setup:z \
--v ${_CURR_DIR}/hosts_prepare.yaml:/tmp/hosts_prepare.yaml:z \
+-v ${_CURR_DIR}/inventory:/tmp/inventory:Z \
+-v ${_CURR_DIR}/docker-storage-setup:/tmp/docker-storage-setup:Z \
+-v ${_CURR_DIR}/hosts_prepare.yaml:/tmp/hosts_prepare.yaml:Z \
 {% if cloud_provider == 'azr' %}
--v ${_CURR_DIR}/azure.conf:/tmp/azure.conf:z \
+-v ${_CURR_DIR}/azure.conf:/tmp/azure.conf:Z \
 {% endif %}
--v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:z \
+-v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:Z \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=/tmp/hosts_prepare.yaml \
@@ -28,8 +28,8 @@ docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
 ### openshift pre-req
 ############################
 docker run -u `id -u` \
--v ${_CURR_DIR}/inventory:/tmp/inventory:z \
--v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:z \
+-v ${_CURR_DIR}/inventory:/tmp/inventory:Z \
+-v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:Z \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=playbooks/prerequisites.yml \
@@ -43,8 +43,8 @@ docker.io/openshift/origin-ansible:{{v_origin_installer_image}}
 ### openshift deployment
 ############################
 docker run -u `id -u` \
--v ${_CURR_DIR}/inventory:/tmp/inventory:z \
--v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:z \
+-v ${_CURR_DIR}/inventory:/tmp/inventory:Z \
+-v {{lookup('env','PROJECT_DIR')}}/{{private_key_file}}:/opt/app-root/src/.ssh/id_rsa:Z \
 -e INVENTORY_DIR=/tmp/inventory \
 -e OPTS="--become -v" \
 -e PLAYBOOK_FILE=playbooks/deploy_cluster.yml \

@@ -6,8 +6,11 @@
 
 |secret_key | Your AWS Account Access Secret Key |
 
-|key_pair_name | The SSH Key pair that will be created, this key will be added |to `~/.ssh/authorized_keys` of the `cloud_user` in the ec2 instances| openshift | 
-| private_key_file | The SSH private key file that gets saved after keypair creation| aws_openshift.pem |
+|key_pair_name | The SSH Key pair that will be created, this key will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the ec2 instances| openshift
+
+| cloud_user | The user to SSH into the instances | centos
+
+| private_key_file | The SSH private key file that gets saved after keypair creation | aws_openshift.pem 
 
 | instance_type | The https://aws.amazon.com/ec2/instance-types/[ec2 compute instances] size | m5.xlarge 
 
@@ -17,13 +20,11 @@
 
 | security_group | The firewall Security Group by deault allows Port 22, 80,443 and 8443  | all-ssh-http-https
 
-| cloud_user | The user to SSH into the instances | centos
-
 | is_rhel | Whether the AMI used is RHEL, this reserved for future use | False
 
 |===
 
-IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe
+IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  https://wiki.centos.org/Cloud/AWS
 
 ===== References
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_aws.html[Ansible AWS Guide]

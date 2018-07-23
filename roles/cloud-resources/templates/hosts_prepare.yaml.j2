@@ -5,8 +5,8 @@
  
   tasks: 
   
-  # enable the default eth0 network to be NM Controlled
   {% if cloud_provider == 'azr' and azr.image.offer == 'CentOS' -%}
+  # enable the default eth0 network to be NM Controlled
   - name: Enable NM_CONTROLLED
     lineinfile:
       regexp: '^(NM_CONTROLLED=)(no)$'
@@ -30,7 +30,7 @@
     delegate_to: localhost
 
   - name: wait for azure restart
-    local_action: shell ansible -u {{ azr.cloud_user }} -m ping {% raw -%}{{ inventory_hostname }}{% endraw %}
+    local_action: shell ansible -u {{ azr.cloud_user }} -m ping {{'{{'}} inventory_hostname {{'}}'}}
     register: result
     until: result.rc == 0
     retries: 30

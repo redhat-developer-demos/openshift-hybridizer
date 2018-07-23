@@ -106,6 +106,7 @@ a|
 clouds:
  - gcp
  - azr
+ - aws
 ----
 
 The example configures provisioning of two clouds Azure and Google Cloud Platform
@@ -136,7 +137,7 @@ The provisioning consists of two parts:
  - Provision Cloud Resources
  - Deploying OpenShift 
 
-[[prov-loud-resource]]
+[[prov-cloud-resource]]
 === Cloud Resources
 
 [source,sh,subs=attributes+]
@@ -153,7 +154,6 @@ The undeploying of Cloud Resources are controlled by three main variables that a
 gcp_rollback: False {conum-guard-sh}<1>
 azure_rollback: False {conum-guard-sh}<2>
 aws_rollback: False {conum-guard-sh} <3>
-hybrid_cloud_dist_clean: False {conum-guard-sh} <4>
 ----
 
 <1> Set to `True` to undeploy GCP resources
@@ -168,11 +168,36 @@ $ ./deprovision.sh
 [[deploy-openshift]]
 == Deploy OpenShift
 
-After successful provisioning of <<prov-cloud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`.
+After successful provisioning of <<prov-cloud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`. 
 
-Each cloud directory has as `deploy.sh` which can used to deploy the OpenShift to the respective clouds.
+e.g. The following shows the directory tree for Azure and GCP
+[source,sh,subs=attributes+]
+----
+ out
+   |-azr
+   |---inventory <1>
+   |-----host_vars <2>
+   |- connect.sh <3>
+   |- host_prepare.yaml <4>
+   |- deploy.sh <5>
+   |- docker-storage-setup <6>
+   |-gcp
+   |---inventory
+   |-----host_vars
+   |- connect.sh
+   |- host_prepare.yaml
+   |- deploy.sh
+   |- docker-storage-setup
+----
 
-e.g. lets say you have `gcp` in your clouds, the following steps shows how to deploy OpenShift on to your cloud:
+<1> The cloud specific Ansible Inventory directory
+<2> host_vars, the Ansible host variables  for the cloud provider
+<3> The SSH connect utility, this has the IP address of the OpenShift
+<4> The Cloud Host OpenShift Deployment preparation tasks
+<5> The OpenShift Deploy script
+<6> The Docker storage setup file
+
+e.g. Lets say you want to deploy OpenShit on to your Google Cloud Platform(gcp), run the following command:
 
 [source,sh]
 ----
