@@ -4,6 +4,24 @@
     msg: "Provision Azure Env"
 
 #############################################################################
+## Security KeyPair
+#############################################################################
+- name: "Check that the {{azr.private_key_file}} exists"
+  stat:
+    path: "{{azr.private_key_file}}"
+  register: azrsshfile
+  tags:
+    - cloud-azr
+
+- name: Create Azure SSH Key Pair
+  shell: |
+    ssh-keygen -t rsa -N '' -f "{{azr.private_key_file}}"
+  when: azrsshfile.stat.exists == False
+  register: azr_sshkey
+  tags:
+    - cloud-azr
+
+#############################################################################
 ## Resource Group
 #############################################################################
 
@@ -146,7 +164,7 @@
       disk_size_gb: 128
       storage_blob_name: "{{instance_name}}-docker"
     ssh_public_keys: 
-    - key_data: "{{azr.public_key_file}}"
+    - key_data: "{{lookup('file',azr.public_key_file)}}"
       path: "/home/{{azr.cloud_user}}/.ssh/authorized_keys"
     vm_size: "{{azr.vm_size}}"      
     admin_username: "{{azr.cloud_user}}"
