@@ -22,7 +22,6 @@
       name: "{{item}}"
       state: present
      with_items:
-      - python2-pip
       - python2-passlib
 
    - name: Add OpenShift Users to htpasswd file  
