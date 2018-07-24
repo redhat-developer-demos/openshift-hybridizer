@@ -6,8 +6,7 @@
     version: '>=1.6'
     state: present
 
-- name: Add Users to OpenShift htpasswd file
-  become: yes
+- name: Add Users to OpenShift htpasswd file  
   htpasswd:
     path: /etc/origin/master/htpasswd
     name: "{{item.key}}"

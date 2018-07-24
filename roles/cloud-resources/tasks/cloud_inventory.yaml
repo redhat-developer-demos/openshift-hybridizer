@@ -56,3 +56,22 @@
       src: connect.sh.j2
       mode: 0755
       dest: "{{hybridcloud_distro_dir}}/connect.sh"
+
+###########################################
+# OpenShift Add Users Playbook and Script
+############################################
+
+- name: Copy OpenShift Add Users Playbook
+  copy:
+    src: "{{item}}"
+    dest: "{{hybridcloud_distro_dir}}/{{item}}"
+  with_items:
+   - add_openshift_users.yaml
+   - openshift_users.yaml
+
+- name: Utility script to add Users to OpenShift
+  template:
+      src: add-openshift-users.sh.j2
+      mode: 0755
+      dest: "{{hybridcloud_distro_dir}}/add-openshift-users.sh"
+    

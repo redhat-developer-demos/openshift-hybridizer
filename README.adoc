@@ -181,6 +181,9 @@ e.g. The following shows the directory tree for Azure and GCP
    |- host_prepare.yaml <4>
    |- deploy.sh <5>
    |- docker-storage-setup <6>
+   |- add_openshift_users.yaml <7>
+   |- add-openshift-users.sh <8>
+   |- openshift_users.yaml <9>
    |-gcp
    |---inventory
    |-----host_vars
@@ -188,6 +191,9 @@ e.g. The following shows the directory tree for Azure and GCP
    |- host_prepare.yaml
    |- deploy.sh
    |- docker-storage-setup
+   |- add_openshift_users.yaml <7>
+   |- add-openshift-users.sh <8>
+   |- openshift_users.yaml <9>
 ----
 
 <1> The cloud specific Ansible Inventory directory
@@ -196,11 +202,42 @@ e.g. The following shows the directory tree for Azure and GCP
 <4> The Cloud Host OpenShift Deployment preparation tasks
 <5> The OpenShift Deploy script
 <6> The Docker storage setup file
+<7> The Ansible playbook to add users who will have access to the OpenShift Web Console
+<8> The utility script to run the `add_openshift_users` play
+<9> openshift_users.yaml the users that need to be added/modified/deleted from OpenShift users file
 
 e.g. Lets say you want to deploy OpenShit on to your Google Cloud Platform(gcp), run the following command:
 
-[source,sh]
+[source,sh,subs=attributes+]
 ----
 $ cd $PROJECT_HOME/out/gcp
 $ ./deploy.sh 
 ----
+
+=== Add Users to OpenShift
+
+The OpenShift installed is by default configured to use https://docs.openshift.org/3.9/install_config/configuring_authentication.html#HTPasswdPasswordIdentityProvider[HTPasswd] as the identity provider, with HTPasswd identity provider, the default htpasswd file is `/etc/origin/master/htpasswd`.  
+
+The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.
+
+The `openshift_users.yaml` has two variables defined:
+
+**openshift_users** - a list of dict/hash with keys **username** and an optional **password**, if **password** is omitted a random 8 letter password will be generated 
+
+e.g. 
+[source,yaml,subs=attributes+]
+----
+openshift_users:
+    - {username: "developer",password: "supers3cret"}
+    - {username: "demo"}  {conum-guard-sh} <1>
+----
+<1> the password for the user `demo` in this case will be generated
+
+**openshift_delete_users** -  a list of usernames that needs to be removed or deleted from OpenShift users htpasswd file
+e.g. 
+[source,yaml,subs=attributes+]
+----
+openshift_delete_users:
+    - developer {conum-guard-sh} <1>
+----
+<1> the user `developer` will be deleted from the OpenShift users htpasswd file
