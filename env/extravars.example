@@ -73,7 +73,7 @@ aws:
   key_pair_name: "openshift"
   # keys directory corresponds to  $PROJECT_HOME/project/keys
   private_key_file: keys/aws_openshift.pem
-  https://aws.amazon.com/ec2/instance-types/
+  # https://aws.amazon.com/ec2/instance-types/
   instance_type: "m5.xlarge"
   # centos 7, Please check with https://wiki.centos.org/Cloud/AWS to find AMI ids for your
   # region, https://aws.amazon.com/marketplace/pp/B00O7WM7QW
