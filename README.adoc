@@ -121,14 +121,14 @@ The example configures provisioning of two clouds Azure and Google Cloud Platfor
 
 |===
 
+==== Google Cloud 
+include::{includedir}/gcp_vars.adoc[leveloffset: +1]
+
 ==== Amazon Web Services
 include::{includedir}/aws_vars.adoc[leveloffset: +1]
 
 ==== Azure
 include::{includedir}/azr_vars.adoc[leveloffset: +1]
-
-==== Google Cloud 
-include::{includedir}/gcp_vars.adoc[leveloffset: +1]
 
 == Provisioning 
 
