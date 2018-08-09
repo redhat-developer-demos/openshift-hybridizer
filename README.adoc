@@ -219,7 +219,7 @@ The OpenShift installed is by default configured to use https://docs.openshift.o
 
 The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.
 
-The `openshift_users.yaml` has two variables defined:
+The `roles/cloud-resources/files/openshift_users.yaml` has two variables defined:
 
 **openshift_users** - a list of dict/hash with keys **username** and an optional **password**, if **password** is omitted a random 8 letter password will be generated 
 

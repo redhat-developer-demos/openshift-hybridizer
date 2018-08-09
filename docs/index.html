@@ -793,20 +793,10 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
 <i class="fa icon-important" title=":exclamation:"></i>
 </td>
 <td class="content">
-When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.
+When using Centos images, you may need to subscribe to the images at <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW" class="bare">https://aws.amazon.com/marketplace/pp/B00O7WM7QW</a>, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.
 </td>
 </tr>
 </table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>CentOS 7: <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW" class="bare">https://aws.amazon.com/marketplace/pp/B00O7WM7QW</a></p>
-</li>
-<li>
-<p>CentOS 6: <a href="https://aws.amazon.com/marketplace/pp/B00NQAYLWO" class="bare">https://aws.amazon.com/marketplace/pp/B00NQAYLWO</a></p>
-</li>
-</ul>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1167,7 +1157,7 @@ $ ./deploy.sh</code></pre>
 <p>The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.</p>
 </div>
 <div class="paragraph">
-<p>The <code>openshift_users.yaml</code> has two variables defined:</p>
+<p>The <code>roles/cloud-resources/files/openshift_users.yaml</code> has two variables defined:</p>
 </div>
 <div class="paragraph">
 <p><strong>openshift_users</strong> - a list of dict/hash with keys <strong>username</strong> and an optional <strong>password</strong>, if <strong>password</strong> is omitted a random 8 letter password will be generated</p>
@@ -1214,7 +1204,7 @@ e.g.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-08-09 13:30:51 EDT
+Last updated 2018-08-09 13:49:25 EDT
 </div>
 </div>
 </body>
