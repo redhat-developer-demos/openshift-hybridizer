@@ -3,9 +3,7 @@
 // Settings:
 :idprefix:
 :idseparator: -
-ifndef::env-github[]
 :icons: font
-endif::[]
 ifdef::env-github,env-browser[]
 :toc: preamble
 :toclevels: 5

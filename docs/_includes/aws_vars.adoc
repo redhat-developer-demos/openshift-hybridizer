@@ -1,4 +1,7 @@
-IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  https://aws.amazon.com/marketplace/pp/B00O7WM7QW
+IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  
+
+- CentOS 7: https://aws.amazon.com/marketplace/pp/B00O7WM7QW
+- CentOS 6: https://aws.amazon.com/marketplace/pp/B00NQAYLWO
 
 [cols=".<1,.<4,.<4"]
 |===

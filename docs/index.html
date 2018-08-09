@@ -424,6 +424,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
@@ -442,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <table>
 <tr>
 <td class="icon">
-<div class="title">:paperclip:</div>
+<i class="fa icon-note" title=":paperclip:"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -581,7 +582,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <table>
 <tr>
 <td class="icon">
-<div class="title">:paperclip:</div>
+<i class="fa icon-note" title=":paperclip:"></i>
 </td>
 <td class="content">
 The <code>$PROJECT_HOME/env/extravars</code> follows YAML convention.
@@ -789,13 +790,23 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
 <table>
 <tr>
 <td class="icon">
-<div class="title">:exclamation:</div>
+<i class="fa icon-important" title=":exclamation:"></i>
 </td>
 <td class="content">
-When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW" class="bare">https://aws.amazon.com/marketplace/pp/B00O7WM7QW</a>
+When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.
 </td>
 </tr>
 </table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CentOS 7: <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW" class="bare">https://aws.amazon.com/marketplace/pp/B00O7WM7QW</a></p>
+</li>
+<li>
+<p>CentOS 6: <a href="https://aws.amazon.com/marketplace/pp/B00NQAYLWO" class="bare">https://aws.amazon.com/marketplace/pp/B00NQAYLWO</a></p>
+</li>
+</ul>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -973,7 +984,7 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 <table>
 <tr>
 <td class="icon">
-<div class="title">:paperclip:</div>
+<i class="fa icon-note" title=":paperclip:"></i>
 </td>
 <td class="content">
 <div class="paragraph">
@@ -1036,23 +1047,26 @@ When using Centos images, you may need to subscribe to the images, if you run wi
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">gcp_rollback: False # <b class="conum">(1)</b>
-azure_rollback: False # <b class="conum">(2)</b>
-aws_rollback: False # <b class="conum">(3)</b></code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">gcp_rollback: False <i class="conum" data-value="1"></i><b>(1)</b>
+azure_rollback: False <i class="conum" data-value="2"></i><b>(2)</b>
+aws_rollback: False <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>Set to <code>True</code> to undeploy GCP resources</p>
-</li>
-<li>
-<p>Set to <code>True</code> to undeploy Azure resources</p>
-</li>
-<li>
-<p>Set to <code>True</code> to undeploy AWS resources</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Set to <code>True</code> to undeploy GCP resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Set to <code>True</code> to undeploy Azure resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Set to <code>True</code> to undeploy AWS resources</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1074,15 +1088,15 @@ aws_rollback: False # <b class="conum">(3)</b></code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-sh" data-lang="sh"> out
    |-azr
-   |---inventory <b class="conum">(1)</b>
-   |-----host_vars <b class="conum">(2)</b>
-   |- connect.sh <b class="conum">(3)</b>
-   |- host_prepare.yaml <b class="conum">(4)</b>
-   |- deploy.sh <b class="conum">(5)</b>
-   |- docker-storage-setup <b class="conum">(6)</b>
-   |- add_openshift_users.yaml <b class="conum">(7)</b>
-   |- add-openshift-users.sh <b class="conum">(8)</b>
-   |- openshift_users.yaml <b class="conum">(9)</b>
+   |---inventory <i class="conum" data-value="1"></i><b>(1)</b>
+   |-----host_vars <i class="conum" data-value="2"></i><b>(2)</b>
+   |- connect.sh <i class="conum" data-value="3"></i><b>(3)</b>
+   |- host_prepare.yaml <i class="conum" data-value="4"></i><b>(4)</b>
+   |- deploy.sh <i class="conum" data-value="5"></i><b>(5)</b>
+   |- docker-storage-setup <i class="conum" data-value="6"></i><b>(6)</b>
+   |- add_openshift_users.yaml <i class="conum" data-value="7"></i><b>(7)</b>
+   |- add-openshift-users.sh <i class="conum" data-value="8"></i><b>(8)</b>
+   |- openshift_users.yaml <i class="conum" data-value="9"></i><b>(9)</b>
    |-gcp
    |---inventory
    |-----host_vars
@@ -1090,41 +1104,50 @@ aws_rollback: False # <b class="conum">(3)</b></code></pre>
    |- host_prepare.yaml
    |- deploy.sh
    |- docker-storage-setup
-   |- add_openshift_users.yaml <b class="conum">(7)</b>
-   |- add-openshift-users.sh <b class="conum">(8)</b>
-   |- openshift_users.yaml <b class="conum">(9)</b></code></pre>
+   |- add_openshift_users.yaml <i class="conum" data-value="7"></i><b>(7)</b>
+   |- add-openshift-users.sh <i class="conum" data-value="8"></i><b>(8)</b>
+   |- openshift_users.yaml <i class="conum" data-value="9"></i><b>(9)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>The cloud specific Ansible Inventory directory</p>
-</li>
-<li>
-<p>host_vars, the Ansible host variables  for the cloud provider</p>
-</li>
-<li>
-<p>The SSH connect utility, this has the IP address of the OpenShift</p>
-</li>
-<li>
-<p>The Cloud Host OpenShift Deployment preparation tasks</p>
-</li>
-<li>
-<p>The OpenShift Deploy script</p>
-</li>
-<li>
-<p>The Docker storage setup file</p>
-</li>
-<li>
-<p>The Ansible playbook to add users who will have access to the OpenShift Web Console</p>
-</li>
-<li>
-<p>The utility script to run the <code>add_openshift_users</code> play</p>
-</li>
-<li>
-<p>openshift_users.yaml the users that need to be added/modified/deleted from OpenShift users file</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The cloud specific Ansible Inventory directory</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>host_vars, the Ansible host variables  for the cloud provider</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The SSH connect utility, this has the IP address of the OpenShift</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The Cloud Host OpenShift Deployment preparation tasks</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The OpenShift Deploy script</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The Docker storage setup file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The Ansible playbook to add users who will have access to the OpenShift Web Console</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The utility script to run the <code>add_openshift_users</code> play</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>openshift_users.yaml the users that need to be added/modified/deleted from OpenShift users file</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>e.g. Lets say you want to deploy OpenShit on to your Google Cloud Platform(gcp), run the following command:</p>
@@ -1156,15 +1179,16 @@ $ ./deploy.sh</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">openshift_users:
     - {username: "developer",password: "supers3cret"}
-    - {username: "demo"}  # <b class="conum">(1)</b></code></pre>
+    - {username: "demo"}  <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>the password for the user <code>demo</code> in this case will be generated</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the password for the user <code>demo</code> in this case will be generated</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>openshift_delete_users</strong> -  a list of usernames that needs to be removed or deleted from OpenShift users htpasswd file
@@ -1173,15 +1197,16 @@ e.g.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">openshift_delete_users:
-    - developer # <b class="conum">(1)</b></code></pre>
+    - developer <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
-<ol>
-<li>
-<p>the user <code>developer</code> will be deleted from the OpenShift users htpasswd file</p>
-</li>
-</ol>
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the user <code>developer</code> will be deleted from the OpenShift users htpasswd file</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1189,7 +1214,7 @@ e.g.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-08-09 13:15:53 EDT
+Last updated 2018-08-09 13:30:51 EDT
 </div>
 </div>
 </body>
