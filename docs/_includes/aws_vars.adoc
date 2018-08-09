@@ -1,3 +1,5 @@
+IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  https://aws.amazon.com/marketplace/pp/B00O7WM7QW
+
 [cols=".<1,.<4,.<4"]
 |===
 |Variable Name |Description |  Default value
@@ -24,7 +26,6 @@
 
 |===
 
-IMPORTANT: When using Centos images, you may need to subscribe to the images, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  https://wiki.centos.org/Cloud/AWS
 
 ===== References
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_aws.html[Ansible AWS Guide]

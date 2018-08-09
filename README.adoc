@@ -1,4 +1,5 @@
 = OpenShift Hybridizer
+:env-github:
 // Settings:
 :idprefix:
 :idseparator: -

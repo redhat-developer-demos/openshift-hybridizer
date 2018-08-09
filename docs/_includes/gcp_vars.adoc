@@ -31,7 +31,7 @@
 |===
 
 [[create-gce-creds]]
-== Creating GCE Credentials
+===== Creating GCE Credentials
 
 [source,sh,subs=attributes+]
 ----
@@ -69,7 +69,7 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
     --member serviceAccount:$IAM_ACCOUNT --role roles/iam.serviceAccountUser
 ----
 
-== References
+===== References
 
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_gce.html[Ansible GCP Guide]
 
