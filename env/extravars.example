@@ -37,8 +37,8 @@ gcp:
   # Download the GCE credentials file JSON
   # save it under name gce-key.json inside $PROJECT_HOME/project/keys
   # IMPORTANT: If you change this path then you might need to alter the scripts
-  credentials_file: keys/gce-key.json
   project_id: "<your-gce-project>"
+  credentials_file: keys/gce-key.json
   # https://cloud.google.com/compute/docs/regions-zones/
   region: "asia-south1"
   zone: "asia-south1-a"  

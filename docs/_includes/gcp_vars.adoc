@@ -4,9 +4,9 @@
 
 |service_account_email| The Google Cloud https://cloud.google.com/compute/docs/access/service-accounts/[Service Accounts] |
 
-|credentials_file| The Google Cloud credentials JSON file corresponding to the `service_account_email` .  Refer to <<create-gce-creds>> on how to create one for your project|
-
 |project_id | The Google Cloud Project where the resources will be created |
+
+|credentials_file| The Google Cloud credentials JSON file corresponding to the `service_account_email` .  Refer to <<create-gce-creds>> on how to create one for your project|
 
 |region| The Google compute https://cloud.google.com/compute/docs/regions-zones/[regions and zones] | asia-south1
 
