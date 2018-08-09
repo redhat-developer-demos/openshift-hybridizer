@@ -109,7 +109,7 @@ clouds:
  - aws
 ----
 
-The example configures provisioning of two clouds Azure and Google Cloud Platform
+The example configures provisioning of three clouds: AWS, Azure and Google Cloud Platform
 
 |instance_name | The compute instance name that will be assigned |  openshift-all-in-one |  
 
