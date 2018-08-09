@@ -9,3 +9,14 @@
 - name: Deprovision Node in Azure
   include_tasks: "azure_rollback.yaml"
   when: azure_rollback
+  
+- name: Delete all the existing Cloud Providers Hosts folder 
+  file:
+    path: out/
+    state: absent
+
+- name: Delete all the existing Cloud Providers Hosts folder 
+  file:
+    path: out/.gitkeep
+    state: touch
+
