@@ -75,7 +75,7 @@ aws:
   private_key_file: keys/aws_openshift.pem
   # https://aws.amazon.com/ec2/instance-types/
   instance_type: "m5.xlarge"
-  # centos 7, Please check with https://wiki.centos.org/Cloud/AWS to find AMI ids for your region.
+  # CentOS 7, Please check with https://wiki.centos.org/Cloud/AWS to find AMI ids for your region.
   image: "ami-1780a878" 
   #https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
   region: "ap-south-1"  
