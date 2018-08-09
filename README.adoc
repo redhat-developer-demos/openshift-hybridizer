@@ -219,7 +219,7 @@ The OpenShift installed is by default configured to use https://docs.openshift.o
 
 The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.
 
-The `roles/cloud-resources/files/openshift_users.yaml` has two variables defined:
+The `out/<cloud>/openshift_users.yaml` has two variables defined:
 
 **openshift_users** - a list of dict/hash with keys **username** and an optional **password**, if **password** is omitted a random 8 letter password will be generated 
 
@@ -240,3 +240,11 @@ openshift_delete_users:
     - developer {conum-guard-sh} <1>
 ----
 <1> the user `developer` will be deleted from the OpenShift users htpasswd file
+
+After you have defined the users, run the following command:
+
+[source,sh,subs=attributes+]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./deploy.sh 
+----

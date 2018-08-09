@@ -1157,7 +1157,7 @@ $ ./deploy.sh</code></pre>
 <p>The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.</p>
 </div>
 <div class="paragraph">
-<p>The <code>roles/cloud-resources/files/openshift_users.yaml</code> has two variables defined:</p>
+<p>The <code>out/&lt;cloud&gt;/openshift_users.yaml</code> has two variables defined:</p>
 </div>
 <div class="paragraph">
 <p><strong>openshift_users</strong> - a list of dict/hash with keys <strong>username</strong> and an optional <strong>password</strong>, if <strong>password</strong> is omitted a random 8 letter password will be generated</p>
@@ -1198,13 +1198,22 @@ e.g.</p>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>After you have defined the users, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-sh" data-lang="sh">$ cd $PROJECT_HOME/out/gcp
+$ ./deploy.sh</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-08-09 13:49:25 EDT
+Last updated 2018-08-09 14:47:10 EDT
 </div>
 </div>
 </body>
