@@ -150,7 +150,7 @@
     region: "{{aws.region}}"
     aws_access_key: "{{aws.access_key}}"
     aws_secret_key: "{{aws.secret_key}}"
-    delete_on_termination: True
+    delete_on_termination: yes
     instance: "{{ec2instance.instance_ids[0]}}"
     volume_size: 100
     volume_type: 'gp2'
@@ -169,7 +169,7 @@
     aws_secret_key: "{{aws.secret_key}}"
     device_id: "{{ item }}"
     in_vpc: True
-    release_on_disassociation: True
+    release_on_disassociation: yes
   register: ec2ip
   with_items: "{{ ec2instance.instance_ids}}"
   tags:
