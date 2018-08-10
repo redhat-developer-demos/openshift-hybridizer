@@ -15,8 +15,13 @@
     path: out/
     state: absent
 
-- name: Delete all the existing Cloud Providers Hosts folder 
+- name: Create out folder
   file:
-    path: out/.gitkeep
-    state: touch
+    path: out/
+    state: directory
+
+- name: Create a gitkeep file insite the out folder
+  copy:
+      content: ""
+      dest: out/.gitkeep
 
