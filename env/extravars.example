@@ -81,6 +81,7 @@ aws:
   region: "ap-south-1"  
   security_group: all-ssh-http-https
   is_rhel: False
+
 ##########################################################################################################
 #
 # Azure 
