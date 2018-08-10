@@ -1,5 +1,6 @@
 = OpenShift Hybridizer
 :env-github:
+:source-highlighter: highlightjs
 // Settings:
 :idprefix:
 :idseparator: -
