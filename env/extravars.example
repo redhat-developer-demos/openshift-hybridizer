@@ -93,6 +93,8 @@ azr:
   secret: "<secret-key>"
   subscription_id: "<subscription-id>"
   tenant: "<tenant-id>"
+  # https://azure.microsoft.com/en-in/global-infrastructure/regions/
+  location: "<the location of the vm>"
   # This user will have sudo right and the public key (public_key_file) of private_key_file 
   # will be added to the users .ssh/authorized_keys
   cloud_user: centos
@@ -102,8 +104,6 @@ azr:
   # If these files are not present the will be generated
   private_key_file: keys/azure_id_rsa
   public_key_file: keys/azure_id_rsa.pub
-  # https://azure.microsoft.com/en-in/global-infrastructure/regions/
-  location: "<the location of the vm>"
   resource_group: OpenShift
   cloud: AzureCloud
   # https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs

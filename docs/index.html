@@ -879,6 +879,24 @@ When using Centos 7 images, you may need to subscribe to the images at <a href="
 </div>
 <div class="sect3">
 <h4 id="azure">Azure</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title=":paperclip:"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To know how to create your Azure Service Principal, refer to <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal">Creating Azure Service Principal</a>.  This helps in setting the variables <code>client_id</code>, <code>tenant</code> and <code>secret</code>.</p>
+</div>
+<div class="paragraph">
+<p>To know your subscription id check out
+<a href="https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/" class="bare">https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11.1111%;">
@@ -895,22 +913,27 @@ When using Centos 7 images, you may need to subscribe to the images at <a href="
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">client_id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure Client ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure Client ID or Application Id</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">secret</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Azure Client Secret</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azure Client Secret  Key</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">subscription_id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Your Azure Subscription ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Your Azure Subscription ID . More info <a href="https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/">here</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tenant</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Azure Tenant ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="https://azure.microsoft.com/en-in/global-infrastructure/regions/">Azure Regions</a>. Examples: southindia, eastus, northeurope</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -927,11 +950,6 @@ When using Centos 7 images, you may need to subscribe to the images at <a href="
 <td class="tableblock halign-left valign-top"><p class="tableblock">public_key_file</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SSH Public Key of the <code>private_key_file</code> that will be added to <code>~/.ssh/authorized_keys</code> of the <code>cloud_user</code> in the Azure VM instances</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">$PROJECT_HOME/keys/azure_id_rsa.pub</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="https://azure.microsoft.com/en-in/global-infrastructure/regions/">Azure Regions</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">southindia</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">resource_group</p></td>
@@ -973,24 +991,6 @@ When using Centos 7 images, you may need to subscribe to the images at <a href="
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title=":paperclip:"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>To know how to create your Azure Service Principal, refer to <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal">Creating Azure Service Principal</a>.  This helps in setting the variables <code>client_id</code>, <code>tenant</code> and <code>secret</code>.</p>
-</div>
-<div class="paragraph">
-<p>To know your subscription id check out
-<a href="https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/" class="bare">https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/</a></p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="sect4">
 <h5 id="references-3">References</h5>
 <div class="paragraph">

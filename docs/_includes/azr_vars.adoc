@@ -1,22 +1,30 @@
+[NOTE]
+====
+To know how to create your Azure Service Principal, refer to https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal[Creating Azure Service Principal].  This helps in setting the variables `client_id`, `tenant` and `secret`.
+
+To know your subscription id check out 
+https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/
+====
+
 [cols=".<1,.<4,.<4"]
 |===
 |Variable Name | Description |  Default value
 
-|client_id | Azure Client ID |
+|client_id | Azure Client ID or Application Id |
 
-|secret | Azure Client Secret |
+|secret | Azure Client Secret  Key|
 
-|subscription_id | Your Azure Subscription ID |
+|subscription_id | Your Azure Subscription ID . More info https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/[here] |
 
 |tenant | Azure Tenant ID |
+
+| location | The https://azure.microsoft.com/en-in/global-infrastructure/regions/[Azure Regions]. Examples: southindia, eastus, northeurope | 
 
 | cloud_user | The user to SSH into the instances, this will be created during instance creation.  For Linux instances this user will have `sudo` rights | centos
 
 | private_key_file | The SSH private key file will be required to SSH into the instances, if the file does not exists it will created | $PROJECT_HOME/keys/azure_id_rsa
 
 |public_key_file | The SSH Public Key of the `private_key_file` that will be added to `~/.ssh/authorized_keys` of the `cloud_user` in the Azure VM instances| $PROJECT_HOME/keys/azure_id_rsa.pub
-
-| location | The https://azure.microsoft.com/en-in/global-infrastructure/regions/[Azure Regions] | southindia
 
 | resource_group | The resource group a.k.a logical group name under which all the resources of the `location` will be grouped. https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview | OpenShift 
 
@@ -40,13 +48,7 @@
 
 |===
 
-[NOTE]
-====
-To know how to create your Azure Service Principal, refer to https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal[Creating Azure Service Principal].  This helps in setting the variables `client_id`, `tenant` and `secret`.
 
-To know your subscription id check out 
-https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/
-====
 
 ===== References
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_azure.html[Ansible Azure Guide]
