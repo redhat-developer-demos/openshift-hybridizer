@@ -136,8 +136,7 @@
     - "{{aws.security_group}}"
     vpc_subnet_id: "{{ openshift_subnet.subnet.id }}"
     instance_tags:
-      Name: "{{instance_name}}"
-      OpenShift_Type: "Origin"
+      "{ 'Name' : '{{instance_name}}', 'OpenShift_Type'  : 'Origin', 'kubernetes.io/cluster/{{hybridizer_cluster_id}}': '{{hybridizer_cluster_id}}' }"
   register: ec2instance
   tags:
     - cloud-aws

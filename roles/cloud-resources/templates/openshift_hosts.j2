@@ -12,7 +12,7 @@ openshift_portal_net=172.30.0.0/16
 openshift_release={{openshift_release}}
 
 # User management
-openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 openshift_master_manage_htpasswd=false
 
 openshift_enable_service_catalog=false
@@ -24,4 +24,4 @@ openshift_enable_service_catalog=false
 {{cloud_host_alias}}
 
 [nodes]
-{{cloud_host_alias}} openshift_schedulable=true openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+{{cloud_host_alias}} openshift_node_group_name="node-config-all-in-one"

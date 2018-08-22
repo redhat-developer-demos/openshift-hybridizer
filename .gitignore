@@ -1,5 +1,7 @@
 env/envvars
 env/extravars
+env/extravars.*
+!env/env/extravars.example
 project/keys
 !project/keys/README.md
 project/.ansible

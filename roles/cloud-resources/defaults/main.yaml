@@ -1,7 +1,8 @@
-openshift_release: "v3.9"
+openshift_release: "v3.10"
 openshift_deployment_type: origin
-v_origin_installer_image: v3.9.28
-v_ocp_installer_image: v3.9.33-3
+v_origin_installer_image: v3.10.0
+v_ocp_installer_image: v3.10.21-4
+hybridizer_cluster_id: allinone
 openshift_firewall_ports:
   udp:
     - 53

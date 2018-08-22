@@ -11,12 +11,12 @@ deployment_type: origin
 {% if cloud_provider == 'gcp' %}
 openshift_cloudprovider_kind: gce
 openshift_gcp_project: {{gcp.project_id}}
-openshift_gcp_prefix: allinone
+openshift_gcp_prefix: {{hybridizer_cluster_id}}
 {% elif cloud_provider == 'aws'  %}
 openshift_cloudprovider_kind: aws
 openshift_cloudprovider_aws_access_key: "{{ aws.access_key }}"
 openshift_cloudprovider_aws_secret_key: "{{ aws.secret_key }}"
-openshift_clusterid: allinone
+openshift_clusterid: {{hybridizer_cluster_id}}
 {% elif cloud_provider == 'azr'  -%}
 openshift_cloudprovider_kind: azure
 osm_controller_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf']}"
