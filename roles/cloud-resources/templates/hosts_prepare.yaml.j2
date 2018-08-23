@@ -90,7 +90,7 @@
   {% if cloud_provider == 'azr' -%}
   - name: Create Azure Cloud Provider Config Directory
     file:
-      dest: /etc/origin/cloudprovider
+      dest: /etc/azure
       mode: 0600
       state: directory
 
@@ -98,7 +98,7 @@
     copy:
       src: "/tmp/azure.conf"
       mode: 0600
-      dest: /etc/origin/cloudprovider/azure.conf
+      dest: /etc/azure/azure.conf
   {% endif %}
 
 {% if is_rhel -%}

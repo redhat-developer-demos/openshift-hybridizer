@@ -19,9 +19,16 @@ openshift_cloudprovider_aws_secret_key: "{{ aws.secret_key }}"
 openshift_clusterid: {{hybridizer_cluster_id}}
 {% elif cloud_provider == 'azr'  -%}
 openshift_cloudprovider_kind: azure
-osm_controller_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf']}"
-osm_api_server_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf']}"
-openshift_node_kubelet_args: "{'cloud-provider': ['azure'], 'cloud-config': ['/etc/origin/cloudprovider/azure.conf'], 'enable-controller-attach-detach': ['true']}"
+openshift_cloudprovider_azure_client_id: "{{azr.client_id}}"
+openshift_cloudprovider_azure_client_secret: "{{azr.secret}}"
+openshift_cloudprovider_azure_tenant_id: "{{azr.tenant}}"
+openshift_cloudprovider_azure_subscription_id: "{{azr.subscription_id}}"
+openshift_cloudprovider_azure_resource_group: "{{azr.resource_group}}"
+openshift_cloudprovider_azure_location: "{{azr.location}}"
+openshift_cloudprovider_azure_cloud: "{{azr.cloud}}"
+openshift_cloudprovider_azure_vnet_name: "{{azr.vm_net_name}}"
+openshift_cloudprovider_azure_security_group_name: "{{azr.security_group}}"
+openshift_cloudprovider_azure_availability_set_name: "all-in-one-openshift"
 {% endif %}
 
 # the default domain suffixes to the app

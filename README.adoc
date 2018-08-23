@@ -217,6 +217,9 @@ $ ./deploy.sh
 
 === Add Users to OpenShift
 
+
+There are no users created by default with OpenShift installation, this section details on how to add new users.
+
 The OpenShift installed is by default configured to use https://docs.openshift.org/3.9/install_config/configuring_authentication.html#HTPasswdPasswordIdentityProvider[HTPasswd] as the identity provider, with HTPasswd identity provider, the default htpasswd file is `/etc/origin/master/htpasswd`.  
 
 The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.
@@ -248,5 +251,18 @@ After you have defined the users, run the following command:
 [source,sh,subs=attributes+]
 ----
 $ cd $PROJECT_HOME/out/gcp
-$ ./deploy.sh 
+$ ./add-openshift-users.sh
+----
+
+==== Adding Admin User to OpenShift
+
+Follow the steps defined above to add a new user called `admin` with the password of your choice, to provide the user `admin` with **Cluster Admin Privileges** you might need to login to the node and execute the following commands:
+
+[source,sh,subs=attributes+]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh 
+$ sudo -i 
+$ oc login -u system:admin
+$ oc adm policy add-cluster-role-to-user cluster-admin admin
 ----
