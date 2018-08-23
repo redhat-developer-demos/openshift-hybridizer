@@ -35,7 +35,11 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
     --member serviceAccount:$IAM_ACCOUNT --role roles/compute.networkAdmin
 
 $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
+    --member serviceAccount:$IAM_ACCOUNT --role roles/compute.securityAdmin
+
+$ gcloud projects add-iam-policy-binding $IAM_PROJECT \
     --member serviceAccount:$IAM_ACCOUNT --role roles/iam.serviceAccountUser
+
 ----
 
 [cols=".<1,.<4,.<4"]

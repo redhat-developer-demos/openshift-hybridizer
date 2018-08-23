@@ -6,6 +6,12 @@ To know your subscription id check out
 https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscription-guid-new-portal/
 ====
 
+[IMPORTANT]
+====
+The application should have `Contributor` role to allow provisioning of resources correctly.
+Ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal#assign-application-to-role
+====
+
 [cols=".<1,.<4,.<4"]
 |===
 |Variable Name | Description |  Default value
@@ -28,7 +34,7 @@ https://blogs.msdn.microsoft.com/mschray/2016/03/18/getting-your-azure-subscript
 
 | resource_group | The resource group a.k.a logical group name under which all the resources of the `location` will be grouped. https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview | OpenShift 
 
-| cloud | The Azure Cloud Environment to use, possible values are **AzureCloud** or **AzureChinaCloud** or **AzureUSGovernment** | AzurePublicCloud
+| cloud | The Azure Cloud Environment to use, possible values are **AzurePublicCloud** or **AzureChinaCloud** or **AzureUSGovernment** | AzurePublicCloud
 
 | vm_size | The Azure https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs[VM sizes] | Standard_D4_v3
 

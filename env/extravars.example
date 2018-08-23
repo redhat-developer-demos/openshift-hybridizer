@@ -105,7 +105,7 @@ azr:
   private_key_file: keys/azure_id_rsa
   public_key_file: keys/azure_id_rsa.pub
   resource_group: OpenShift
-  cloud: AzureCloud
+  cloud: AzurePublicCloud
   # https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs
   vm_size: "Standard_D4_v3"
   image:

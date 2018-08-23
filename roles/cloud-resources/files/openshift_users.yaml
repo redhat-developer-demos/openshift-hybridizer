@@ -4,6 +4,7 @@
 # to have the users add/updated in OpenShift htpasswd file
 openshift_users:
     - {username: "developer",password: "supers3cret"}
+    - {username: "admin",password: "supers3cretAdmin"}
 # Add the List of users to be deleted from OpenShift 
 openshift_delete_users:
 #    - developer

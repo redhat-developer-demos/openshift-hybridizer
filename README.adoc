@@ -166,6 +166,24 @@ aws_rollback: False {conum-guard-sh} <3>
 $ ./deprovision.sh 
 ----
 
+[NOTE]
+====
+For easier explanation further sections in the document assumes you have provisioned for `gcp`
+====
+
+[[node-connect]]
+== Connecting to OpenShift Node
+
+The following commands shows how you can connect to the provisioned instance via ssh:
+
+[source,sh]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh 
+----
+
+The `connect.sh` script also holds information about the public IP, the ssh user and the private key to be used.
+
 [[deploy-openshift]]
 == Deploy OpenShift
 
@@ -217,7 +235,6 @@ $ ./deploy.sh
 
 === Add Users to OpenShift
 
-
 There are no users created by default with OpenShift installation, this section details on how to add new users.
 
 The OpenShift installed is by default configured to use https://docs.openshift.org/3.9/install_config/configuring_authentication.html#HTPasswdPasswordIdentityProvider[HTPasswd] as the identity provider, with HTPasswd identity provider, the default htpasswd file is `/etc/origin/master/htpasswd`.  
@@ -235,7 +252,7 @@ openshift_users:
     - {username: "developer",password: "supers3cret"}
     - {username: "demo"}  {conum-guard-sh} <1>
 ----
-<1> the password for the user `demo` in this case will be generated
+<1> in this case the password for the user `demo` in this case will be generated
 
 **openshift_delete_users** -  a list of usernames that needs to be removed or deleted from OpenShift users htpasswd file
 e.g. 

@@ -43,6 +43,19 @@
   tags:
     - cloud-gcp
 
+- name: GCE Create Firewall Rule to allow OpenShift Console Access
+  gce_net:
+    service_account_email: "{{ gcp.service_account_email }}"
+    credentials_file: "{{ gcp.credentials_file }}"
+    project_id: "{{ gcp.project_id }}"
+    name: default
+    fwname: "openshift-master-console"
+    allowed: tcp:8443
+    state: "present"
+    target_tags: "openshift-master"
+  tags:
+    - cloud-gcp
+    
 - name: GCE Create All In One OpenShift Node
   gce:
     instance_names: "{{instance_name}}"
