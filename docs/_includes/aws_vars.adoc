@@ -1,5 +1,6 @@
 IMPORTANT: When using Centos 7 images, you may need to subscribe to the images at https://aws.amazon.com/marketplace/pp/B00O7WM7QW, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  
 
+
 [cols=".<1,.<4,.<4"]
 |===
 |Variable Name |Description |  Default value
@@ -16,7 +17,7 @@ IMPORTANT: When using Centos 7 images, you may need to subscribe to the images a
 
 | instance_type | The https://aws.amazon.com/ec2/instance-types/[ec2 compute instances] size | m5.xlarge 
 
-| image | The AMI ID of the imagem defaults to CentOS 7 of `ap-south-1`, refer to https://wiki.centos.org/Cloud/AWS for more details of AMI for other regions / CentOS 6 is AMI is not supported as it doesn't provide support for Elastic Network Adapter (ENA) | ami-1780a878
+| image | The AMI ID of the imagem defaults to CentOS 7 of `ap-south-1`, refer to https://wiki.centos.org/Cloud/AWS for more details of AMI for other regions / CentOS 6 is AMI is not supported as it doesn't provide support for Elastic Network Adapter (ENA). Valid combinations of region/AMIs can be found in https://github.com/redhat-developer-demos/openshift-hybridizer/blob/master/docs/_includes/aws-amis.adoc[this document] | ami-1780a878
 
 | region | The https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html/[ec2 compute region] | ap-south-1 
 

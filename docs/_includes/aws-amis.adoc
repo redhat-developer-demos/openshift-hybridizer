@@ -1,0 +1,7 @@
+# Check here the valid region / AMI combinations
+
+[cols=".<4,.<4"]
+|===
+|Region    | AMI
+|us-west-1 |  ami-4826c22b
+|===
