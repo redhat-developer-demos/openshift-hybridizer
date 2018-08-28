@@ -3,5 +3,6 @@
 [cols=".<4,.<4"]
 |===
 |Region    | AMI
-|us-west-1 |  ami-4826c22b
+|us-west-1 | ami-4826c22b
+|us-east-2 | ami-9c0638f9
 |===
