@@ -8,7 +8,7 @@ site:
 content:
   sources:
     - url: .
-      branches: antora-site
+      branches: master
       start_path: documentation
 ui:
   bundle:
