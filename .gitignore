@@ -11,4 +11,5 @@ artifacts/**
 !artifacts/.gitkeep
 inventory/**
 !inventory/hostsdocs.old
-docs.old
+gh-pages
+.cache
