@@ -1,40 +1,6 @@
 = OpenShift Hybridizer
 This content is brought to you by http://developers.redhat.com - Register today!
-:toc: macro
-:toc-title: Table of Contents
-:toclevels: 3
-:icons: font
-:data-uri:
-:source-highlighter: highlightjs
 
 - An HTML version of the documentation is available at https://redhat-developer-demos.github.io/openshift-hybridizer/
 
 - The source code is available at https://github.com/redhat-developer-demos/openshift-hybridizer
-
-toc::[]
-
-include::documentation/modules/ROOT/pages/index.adoc[Overview]
-include::documentation/modules/ROOT/pages/setup.adoc[Setup]
-include::documentation/modules/ROOT/pages/prepare_env.adoc[Prepare Environment]
-include::documentation/modules/ROOT/pages/cloud_resources.adoc[Create Cloud Resources]
-include::documentation/modules/ROOT/pages/setup.adoc#prov-cloud-resource[Provision Cloud Resources]
-include::documentation/modules/ROOT/pages/setup.adoc#deploy-openshift[Deploy OpenShift]
-include::documentation/modules/ROOT/pages/setup.adoc#node-connect[Connect to Node]
-include::documentation/modules/ROOT/pages/setup.adoc#add-users-to-openshift[Add users to OpenShift]
-include::documentation/modules/ROOT/pages/setup.adoc#add-admin-user-to-openshift[Add Admin User to OpenShift]
-include::documentation/modules/ROOT/pages/setup.adoc#deprov-cloud-resource[DeProvision Cloud Resources]
-
-include::documentation/modules/ROOT/pages/openshift_vars.adoc[OpenShift Variables]
-
-include::documentation/modules/ROOT/pages/gcp.adoc[Google Cloud]
-include::documentation/modules/ROOT/pages/gcp.adoc#create-gce-creds[Create Credentials]
-include::documentation/modules/ROOT/pages/gcp.adoc#gce-variables[Variables]
-include::documentation/modules/ROOT/pages/gcp.adoc#gce-references[References]
-include::documentation/modules/ROOT/pages/aws.adoc[Amazon Web Services]
-include::documentation/modules/ROOT/pages/aws.adoc#aws-variables[Variables]
-include::documentation/modules/ROOT/pages/aws.adoc#aws-amis[AMIs]
-include::documentation/modules/ROOT/pages/aws.adoc#aws-references[References]
-include::documentation/modules/ROOT/pages/azure.adoc[Azure]
-include::documentation/modules/ROOT/pages/azure.adoc#create-azr-sa[Create Service Account]
-include::documentation/modules/ROOT/pages/azure.adoc#azr-variables[Variables]
-include::documentation/modules/ROOT/pages/azure.adoc#azr-references[References]
