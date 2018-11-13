@@ -1,0 +1,160 @@
+= Setup 
+include::_attributes.adoc[]
+
+[[prov-cloud-resource]]
+== Provisioning 
+
+The provisioning consists of two parts:
+
+ - Provision Cloud Resources
+ - Deploying OpenShift 
+
+=== Cloud Resources
+
+[source,sh,subs=attributes+]
+----
+$ ./provision.sh 
+----
+
+[NOTE]
+====
+For easier explanation, further sections in the document assumes you have provisioned for one cloud say `gcp`
+====
+
+[[node-connect]]
+== Connecting to OpenShift Node
+
+The following commands shows how you can connect to the provisioned instance via ssh:
+
+[source,sh]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh 
+----
+
+The `connect.sh` script also holds information about the public IP, the ssh user and the private key to be used.
+
+[[deploy-openshift]]
+== Deploy OpenShift
+
+After successful provisioning of <<prov-cloud-resource>>, there should be one directory per cloud created under `$PROJECT_HOME/out`. 
+
+e.g. The following shows the directory tree for Azure and GCP
+[source,sh,subs=attributes+]
+----
+ out
+   |-azr
+   |---inventory <1>
+   |-----host_vars <2>
+   |- connect.sh <3>
+   |- host_prepare.yaml <4>
+   |- deploy.sh <5>
+   |- docker-storage-setup <6>
+   |- add_openshift_users.yaml <7>
+   |- add-openshift-users.sh <8>
+   |- openshift_users.yaml <9>
+   |-gcp
+   |---inventory
+   |-----host_vars
+   |- connect.sh
+   |- host_prepare.yaml
+   |- deploy.sh
+   |- docker-storage-setup
+   |- add_openshift_users.yaml <7>
+   |- add-openshift-users.sh <8>
+   |- openshift_users.yaml <9>
+----
+
+<1> The cloud specific Ansible Inventory directory
+<2> host_vars, the Ansible host variables  for the cloud provider
+<3> The SSH connect utility, this has the IP address of the OpenShift
+<4> The Cloud Host OpenShift Deployment preparation tasks
+<5> The OpenShift Deploy script
+<6> The Docker storage setup file
+<7> The Ansible playbook to add users who will have access to the OpenShift Web Console
+<8> The utility script to run the `add_openshift_users` play
+<9> openshift_users.yaml the users that need to be added/modified/deleted from OpenShift users file
+
+e.g. Lets say you want to deploy OpenShift to your Google Cloud Platform(gcp), run the following commands:
+
+[source,sh,subs=attributes+]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./deploy.sh 
+----
+
+[[add-users-to-openshift]]
+=== Add Users to OpenShift
+
+There are no users created by default with OpenShift installation, this section details on how to add new users.
+
+The OpenShift installed is by default configured to use https://docs.openshift.org/3.9/install_config/configuring_authentication.html#HTPasswdPasswordIdentityProvider[HTPasswd] as the identity provider, with HTPasswd identity provider, the default htpasswd file is `/etc/origin/master/htpasswd`.  
+
+The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.
+
+The `out/<cloud>/openshift_users.yaml` has two variables defined:
+
+**openshift_users** - a list of dict/hash with keys **username** and an optional **password**, if **password** is omitted a random 8 letter password will be generated 
+
+e.g. 
+[source,yaml,subs=attributes+]
+----
+openshift_users:
+    - {username: "developer",password: "supers3cret"}
+    - {username: "demo"} <1>
+----
+<1> in this case the password for the user `demo` in this case will be generated
+
+**openshift_delete_users** -  a list of usernames that needs to be removed or deleted from OpenShift users htpasswd file
+e.g. 
+[source,yaml,subs=attributes+]
+----
+openshift_delete_users:
+    - developer <1>
+----
+<1> the user `developer` will be deleted from the OpenShift users htpasswd file
+
+After you have defined the users, run the following command:
+
+[source,sh,subs=attributes+]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./add-openshift-users.sh
+----
+
+[[add-admin-user-to-openshift]]
+=== Adding Admin User to OpenShift
+
+Follow the steps defined above to add a new user called `admin` with the password of your choice, to provide the user `admin` with **Cluster Admin Privileges** you might need to login to the node and execute the following commands:
+
+[source,sh,subs=attributes+]
+----
+$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh 
+$ sudo -i 
+$ oc login -u system:admin
+$ oc adm policy add-cluster-role-to-user cluster-admin admin
+----
+
+[[deprov-cloud-resource]]
+== DeProvisioning 
+
+The undeploying of Cloud Resources are controlled by three main variables that are defined in `env/extravars`
+
+[source,yaml,subs=attributes+]
+----
+gcp_rollback: False <1>
+azure_rollback: False <2>
+aws_rollback: False <3>
+----
+
+<1> Set to `True` to undeploy GCP resources
+<2> Set to `True` to undeploy Azure resources
+<3> Set to `True` to undeploy AWS resources
+
+[source,sh]
+----
+$ ./deprovision.sh 
+----
+
+NOTE: Sometime the Cloud resources might take time to get terminated or deleted, please verify via the respective cloud console to make sure the resources are deleted.

@@ -10,4 +10,5 @@ out/**
 artifacts/**
 !artifacts/.gitkeep
 inventory/**
-!inventory/hosts
+!inventory/hostsdocs.old
+docs.old
