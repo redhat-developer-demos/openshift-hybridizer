@@ -1,7 +1,11 @@
+= Amazon Web Services
+include::_attributes.adoc[]
+
 IMPORTANT: When using Centos 7 images, you may need to subscribe to the images at https://aws.amazon.com/marketplace/pp/B00O7WM7QW, if you run without subscription the installer will fail with th error and provides the details on how to subscribe.  
 
+[[aws-variables]]
+== Variables
 
-[cols=".<1,.<4,.<4"]
 |===
 |Variable Name |Description |  Default value
 
@@ -27,8 +31,17 @@ IMPORTANT: When using Centos 7 images, you may need to subscribe to the images a
 
 |===
 
+[[aws-amis]]
+== Valid region / AMI combinations
 
-===== References
+|===
+|Region    | AMI
+|us-west-1 | ami-4826c22b
+|us-east-2 | ami-9c0638f9
+|===
+
+[[aws-references]]
+== References
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_aws.html[Ansible AWS Guide]
 
 https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html[Managing AWS Account Keys]

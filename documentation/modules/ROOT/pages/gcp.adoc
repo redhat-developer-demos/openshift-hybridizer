@@ -1,5 +1,8 @@
+= Google Cloud 
+include::_attributes.adoc[]
+
 [[create-gce-creds]]
-===== Creating GCE Credentials
+== Creating GCE Credentials
 
 You can Download 'gcloud' from https://cloud.google.com/sdk/
 
@@ -42,7 +45,9 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
 
 ----
 
-[cols=".<1,.<4,.<4"]
+[[gce-variables]]
+== Variables
+
 |===
 |Variable Name | Description |  Default value
 
@@ -75,7 +80,8 @@ $ gcloud projects add-iam-policy-binding $IAM_PROJECT \
 |===
 
 
-===== References
+[[gce-references]]
+== References
 
 https://docs.ansible.com/ansible/2.6/scenario_guides/guide_gce.html[Ansible GCP Guide]
 

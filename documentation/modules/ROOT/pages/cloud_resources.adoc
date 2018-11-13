@@ -1,0 +1,45 @@
+= Cloud Resources
+include::_attributes.adoc[]
+
+== Preparation 
+
+Rename `$PROJECT_HOME/env/extravars.example` to `$PROJECT_HOME/env/extravars`, this file will be used to configure your cloud keys and other ansible facts. 
+
+The following Cloud Provider specific sections will detail more on the variables that can defined in `extravars`.
+
+NOTE: The `$PROJECT_HOME/env/extravars` follows YAML convention.
+
+== Variables
+
+|===
+| Name |Description |  Default value |  Example
+
+| clouds | The public cloud(s)where to provision| Currently supported values are azr, aws and gcp.
+a| 
+[source,yaml]
+----
+clouds:
+ - gcp
+ - azr
+ - aws
+----
+
+The example configures provisioning of three clouds: AWS, Azure and Google Cloud Platform
+
+|instance_name | The compute instance name that will be assigned |  openshift-all-in-one |  
+
+|gcp_rollback | Delete all Google Cloud Platform resources that were provisioned  |  False |  
+
+|azure_rollback | Delete all Azure resources that were provisioned  |  False | 
+
+|aws_rollback | Delete all Amazon Web Services resources that were provisioned  |  False | 
+
+|===
+
+Checkout the respective cloud guides below for more details on how to prepare and configure each cloud for OpenShift installation:
+
+* xref:gcp.adoc[Google Cloud]
+
+* xref:aws.adoc[Amazon Web Services]
+
+* xref:azure.adoc[Azure]

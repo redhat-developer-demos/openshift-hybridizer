@@ -1,0 +1,33 @@
+= Prepare Environment 
+include::_attributes.adoc[]
+
+== Sources 
+
+The sources of these scripts can be downloaded from  {uri-repo}#[GitHub].
+
+Lets clone the sources `git clone {uri-repo}` to a directory on local file system.  For convenience we shall refer to the sources clone directory as `$PROJECT_HOME`.
+
+== Pre Requisites
+
+* `Docker` installed and available locally, based on your environment have native docker for linux or https://docs.docker.com/docker-for-mac/[Docker for Mac] or https://docs.docker.com/docker-for-windows/[Docker for Windows] installed
+
+* Refer to the following documentation on what are the pre-requisites for each Cloud Provider that are currently supported:
+
+** AWS   - https://docs.ansible.com/ansible/2.5/scenario_guides/guide_aws.html
+
+** Azure - https://docs.ansible.com/ansible/2.5/scenario_guides/guide_azure.html
+
+** Google Cloud Platform -   
+   https://docs.ansible.com/ansible/2.5/scenario_guides/guide_gce.html
+
+[[container-installer]]
+== Installer Image
+
+The installer image is built from {uri-ansible}[Ansible Runner] with need Ansible Cloud modules which are required to provision the cloud resources. The provisioned Cloud resources can then be used to deploy **All In One** OpenShift cluster.
+
+The installer image is available at `{uri-docker-hca}`, to pull it run the command:
+
+[source,sh,subs=attributes+]
+----
+$ docker pull {uri-docker-hca}
+----

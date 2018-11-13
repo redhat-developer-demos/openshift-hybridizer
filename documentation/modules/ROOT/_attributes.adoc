@@ -1,0 +1,17 @@
+:imagesdir: {moduledir}/assets/images
+:source-highlighter: highlightjs
+
+//Aliases
+:conum-guard-sh: #
+ifndef::icons[:conum-guard-sh: # #]
+
+:conum-guard-java: //
+ifndef::icons[:conum-guard-java: // //]
+
+//URIs
+:uri-docker-myrepo-hca: workspace7/ansible-runner
+:uri-docker-hca: quay.io/workspace7/ansible-runner
+:uri-ansible: https://github.com/ansible/ansible-runner
+:uri-repo: https://github.com/redhat-developer-demos/openshift-hybridizer 
+:uri-repo-file-prefix: {uri-repo}/blob/master/
+:uri-repo-tree-prefix: {uri-repo}/tree/master/
