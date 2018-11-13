@@ -3,14 +3,11 @@ include::_attributes.adoc[]
 
 The https://www.ansible.com[Ansible] scripts that can be used to provision an **Hybrid Cloud Environment** and generate the required https://www.ansible.com[Ansible] scripts to deploy **All In One** OpenShift cluster on to it.
 
-[IMPORTANT]
-=====
+
 Currently supported **Cloud Providers**:
 
 * Azure(**azr**)
 * Amazon(**aws**) 
 * Google Cloud Platform (**gcp**)
 
-Supports only OpenShift 3.10 or above 
-=====
-
+IMPORTANT: Supports only OpenShift 3.10 or above 
