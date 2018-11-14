@@ -6,24 +6,23 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: |
+          git log --format=oneline -n 1  $CIRCLE_SHA1 | grep -i "doc"
       - run:
           name: Generate Documentation
           command: |
-            [[ `git log --format=oneline -n 1  $CIRCLE_SHA1 | grep -i '#doc' | wc -l` -gt 0  && FORCE_DOC_GEN=0 || FORCE_DOC_GEN=1']]
-            if [[ $FORCE_DOC_GEN -ge 1 ]]; then 
-              git config credential.helper 'cache --timeout=120'
-              git config user.name "$GH_USERNAME"
-              git config user.email "$GH_EMAIL"
-              git checkout -b gh-pages
-              antora generate --pull --stacktrace site-gh-pages.yml
-              shopt -s extglob 
-              rm -vrf !("site") 
-              mv site/* . && rm -rf site
-              touch .nojekyll
-              git add .
-              git commit -m "generated documentation"
-              git push --force -q https://${GH_TOKEN}@github.com/kameshsampath/openshift-hybridizer.git gh-pages
-            fi
+            git config credential.helper 'cache --timeout=120'
+            git config user.name "$GH_USERNAME"
+            git config user.email "$GH_EMAIL"
+            git checkout -b gh-pages
+            antora generate --pull --stacktrace site-gh-pages.yml
+            shopt -s extglob 
+            rm -vrf !("site") 
+            mv site/* . && rm -rf site
+            touch .nojekyll
+            git add .
+            git commit -m "generated documentation"
+            git push --force -q https://${GH_TOKEN}@github.com/kameshsampath/openshift-hybridizer.git gh-pages
 workflows:
   version: 2
   generate_site:
