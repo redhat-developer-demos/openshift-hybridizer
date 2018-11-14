@@ -1,8 +1,0 @@
-= OpenShift Hybridizer
-This content is brought to you by http://developers.redhat.com - Register today!
-
-image:https://circleci.com/gh/kameshsampath/openshift-hybridizer.svg?style=svg["CircleCI", link="https://circleci.com/gh/kameshsampath/openshift-hybridizer"]
-
-- An HTML version of the documentation is available at https://redhat-developer-demos.github.io/openshift-hybridizer/
-
-- The source code is available at https://github.com/redhat-developer-demos/openshift-hybridizer

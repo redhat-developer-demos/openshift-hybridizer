@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/aws.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/azure.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/cloud_resources.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/gcp.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/index.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/openshift_vars.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/prepare_env.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+<url>
+<loc>https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/setup.html</loc>
+<lastmod>2018-11-14T11:19:04.912Z</lastmod>
+</url>
+</urlset>

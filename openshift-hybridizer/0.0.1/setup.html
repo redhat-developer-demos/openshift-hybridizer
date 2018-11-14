@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup :: OpenShift Hybridizer Docs</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/openshift-hybridizer/openshift-hybridizer/0.0.1/setup.html">
+    <meta name="generator" content="Antora 1.1.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <a href="#">OpenShift Hybridizer</a>
+        <span class="separator">//</span>
+        <a href="https://redhat-developer-demos.github.io/openshift-hybridizer">Docs</a>
+      </div>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Project</div>
+          <div class="navbar-dropdown">
+            <div class="navbar-item"><strong>GitHub</strong></div>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/openshift-hybridizer">Sources</a>
+            <a class="navbar-item" href="https://github.com/redhat-developer-demos/openshift-hybridizer/issues">Issues</a>
+          </div>
+        </div>
+        <a class="navbar-item" href="https://twitter.com/rhdevelopers">
+          <span class="icon">
+            <svg aria-hidden="true" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="#57aaee" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header><div class="main-wrapper">
+<div class="navigation-container" data-component="openshift-hybridizer" data-version="0.0.1">
+  <aside class="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Hybridizer</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Setup</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prepare_env.html">Prepare Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cloud_resources.html">Prepare Cloud Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#prov-cloud-resource">Provision Cloud Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy-openshift">Deploy OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#node-connect">Connect to Node</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#add-users-to-openshift">Add users to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#add-admin-user-to-openshift">Add Admin User to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deprov-cloud-resource">DeProvision Cloud Resources</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="openshift_vars.html">OpenShift Variables</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-toggle"></button>
+    <span class="nav-text">Clouds</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="gcp.html">Google Cloud</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="gcp.html#create-gce-creds">Create Credentials</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="gcp.html#gce-variables">Variables</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="gcp.html#gce-references">References</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="aws.html">Amazon Web Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="aws.html#aws-variables">Variables</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="aws.html#aws-amis">AMIs</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="aws.html#aws-references">References</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-toggle"></button>
+    <a class="nav-link" href="azure.html">Azure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="azure.html#create-azr-sa">Create Service Account</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="azure.html#azr-variables">Variables</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="azure.html#azr-references">References</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Hybridizer</span>
+    <span class="version">0.0.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Hybridizer</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">0.0.1</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="crumbs" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">OpenShift Hybridizer</a></li>
+    <li class="crumb">Setup</li>
+    <li class="crumb"><a href="#prov-cloud-resource">Provision Cloud Resources</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/kameshsampath/openshift-hybridizer/edit/master/documentation/modules/ROOT/pages/setup.adoc">Edit this Page</a></div>
+</div>
+<article class="doc">
+<h1>Setup</h1>
+<div class="sect1">
+<h2 id="prov-cloud-resource"><a class="anchor" href="#prov-cloud-resource"></a>Provisioning</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The provisioning consists of two parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provision Cloud Resources</p>
+</li>
+<li>
+<p>Deploying OpenShift</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_cloud_resources"><a class="anchor" href="#_cloud_resources"></a>Cloud Resources</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ ./provision.sh</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For easier explanation, further sections in the document assumes you have provisioned for one cloud say <code>gcp</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="node-connect"><a class="anchor" href="#node-connect"></a>Connecting to OpenShift Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following commands shows how you can connect to the provisioned instance via ssh:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>connect.sh</code> script also holds information about the public IP, the ssh user and the private key to be used.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy-openshift"><a class="anchor" href="#deploy-openshift"></a>Deploy OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After successful provisioning of <a href="#prov-cloud-resource">Provisioning</a>, there should be one directory per cloud created under <code>$PROJECT_HOME/out</code>.</p>
+</div>
+<div class="paragraph">
+<p>e.g. The following shows the directory tree for Azure and GCP</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh"> out
+   |-azr
+   |---inventory <i class="conum" data-value="1"></i><b>(1)</b>
+   |-----host_vars <i class="conum" data-value="2"></i><b>(2)</b>
+   |- connect.sh <i class="conum" data-value="3"></i><b>(3)</b>
+   |- host_prepare.yaml <i class="conum" data-value="4"></i><b>(4)</b>
+   |- deploy.sh <i class="conum" data-value="5"></i><b>(5)</b>
+   |- docker-storage-setup <i class="conum" data-value="6"></i><b>(6)</b>
+   |- add_openshift_users.yaml <i class="conum" data-value="7"></i><b>(7)</b>
+   |- add-openshift-users.sh <i class="conum" data-value="8"></i><b>(8)</b>
+   |- openshift_users.yaml <i class="conum" data-value="9"></i><b>(9)</b>
+   |-gcp
+   |---inventory
+   |-----host_vars
+   |- connect.sh
+   |- host_prepare.yaml
+   |- deploy.sh
+   |- docker-storage-setup
+   |- add_openshift_users.yaml <i class="conum" data-value="7"></i><b>(7)</b>
+   |- add-openshift-users.sh <i class="conum" data-value="8"></i><b>(8)</b>
+   |- openshift_users.yaml <i class="conum" data-value="9"></i><b>(9)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The cloud specific Ansible Inventory directory</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>host_vars, the Ansible host variables  for the cloud provider</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The SSH connect utility, this has the IP address of the OpenShift</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The Cloud Host OpenShift Deployment preparation tasks</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The OpenShift Deploy script</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The Docker storage setup file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The Ansible playbook to add users who will have access to the OpenShift Web Console</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>The utility script to run the <code>add_openshift_users</code> play</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>openshift_users.yaml the users that need to be added/modified/deleted from OpenShift users file</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>e.g. Lets say you want to deploy OpenShift to your Google Cloud Platform(gcp), run the following commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ cd $PROJECT_HOME/out/gcp
+$ ./deploy.sh</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-users-to-openshift"><a class="anchor" href="#add-users-to-openshift"></a>Add Users to OpenShift</h3>
+<div class="paragraph">
+<p>There are no users created by default with OpenShift installation, this section details on how to add new users.</p>
+</div>
+<div class="paragraph">
+<p>The OpenShift installed is by default configured to use <a href="https://docs.openshift.org/3.9/install_config/configuring_authentication.html#HTPasswdPasswordIdentityProvider">HTPasswd</a> as the identity provider, with HTPasswd identity provider, the default htpasswd file is <code>/etc/origin/master/htpasswd</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following section details on how to add/update/remove users from the htpasswd file to allow users access to the OpenShift Web Console.</p>
+</div>
+<div class="paragraph">
+<p>The <code>out/&lt;cloud&gt;/openshift_users.yaml</code> has two variables defined:</p>
+</div>
+<div class="paragraph">
+<p><strong>openshift_users</strong> - a list of dict/hash with keys <strong>username</strong> and an optional <strong>password</strong>, if <strong>password</strong> is omitted a random 8 letter password will be generated</p>
+</div>
+<div class="paragraph">
+<p>e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">openshift_users:
+    - {username: "developer",password: "supers3cret"}
+    - {username: "demo"} <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>in this case the password for the user <code>demo</code> in this case will be generated</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>openshift_delete_users</strong> -  a list of usernames that needs to be removed or deleted from OpenShift users htpasswd file
+e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">openshift_delete_users:
+    - developer <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the user <code>developer</code> will be deleted from the OpenShift users htpasswd file</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After you have defined the users, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ cd $PROJECT_HOME/out/gcp
+$ ./add-openshift-users.sh</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-admin-user-to-openshift"><a class="anchor" href="#add-admin-user-to-openshift"></a>Adding Admin User to OpenShift</h3>
+<div class="paragraph">
+<p>Follow the steps defined above to add a new user called <code>admin</code> with the password of your choice, to provide the user <code>admin</code> with <strong>Cluster Admin Privileges</strong> you might need to login to the node and execute the following commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ cd $PROJECT_HOME/out/gcp
+$ ./connect.sh
+$ sudo -i
+$ oc login -u system:admin
+$ oc adm policy add-cluster-role-to-user cluster-admin admin</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deprov-cloud-resource"><a class="anchor" href="#deprov-cloud-resource"></a>DeProvisioning</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The undeploying of Cloud Resources are controlled by three main variables that are defined in <code>env/extravars</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">gcp_rollback: False <i class="conum" data-value="1"></i><b>(1)</b>
+azure_rollback: False <i class="conum" data-value="2"></i><b>(2)</b>
+aws_rollback: False <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Set to <code>True</code> to undeploy GCP resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Set to <code>True</code> to undeploy Azure resources</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Set to <code>True</code> to undeploy AWS resources</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">$ ./deprovision.sh</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Sometime the Cloud resources might take time to get terminated or deleted, please verify via the respective cloud console to make sure the resources are deleted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>
