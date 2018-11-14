@@ -6,8 +6,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: |
-          git log --format=oneline -n 1  $CIRCLE_SHA1 | grep -i "doc"
       - run:
           name: Generate Documentation
           command: |
