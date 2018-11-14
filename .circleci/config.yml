@@ -9,8 +9,7 @@ jobs:
       - run:
           name: Generate Documentation
           command: |
-            DOC_GEN=[ $(git log --format=oneline -n 1 $CIRCLE_SHA1 | grep -i "#doc" | wc -l) -gt 0 ]
-            echo "export DOC_GEN=$DOC_GEN" >> conditional_env_vars.sh
+            echo "export DOC_GEN=[ $(git log --format=oneline -n 1 $CIRCLE_SHA1 | grep -i "#doc" | wc -l) -gt 0 ]" >> conditional_env_vars.sh
             echo "source conditional_env_vars.sh" >> $BASH_ENV
             if [ $DOC_GEN -ge 1 ]; then 
               git config credential.helper 'cache --timeout=120'
