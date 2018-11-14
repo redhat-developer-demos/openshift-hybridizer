@@ -6,8 +6,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: |
-
       - run:
           name: Generate Documentation
           command: |
