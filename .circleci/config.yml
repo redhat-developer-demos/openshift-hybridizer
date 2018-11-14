@@ -9,7 +9,8 @@ jobs:
       - run:
           name: Generate Documentation
           command: |
-            if [ $(git log --format=oneline -n 1 $CIRCLE_SHA1 | grep -i "#doc" | wc -l) -ge 1 ]; then 
+            '[ $(git log --format=%B  $TRAVIS_COMMIT_RANGE | grep -i "#doc" | wc -l) -gt 0 ] && FORCE_DOC_GEN=0 || FORCE_DOC_GEN=1'
+            if [ $FORCE_DOC_GEN -ge 1 ]; then 
               git config credential.helper 'cache --timeout=120'
               git config user.name "$GH_USERNAME"
               git config user.email "$GH_EMAIL"
