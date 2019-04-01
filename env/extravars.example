@@ -2,6 +2,10 @@
 ansible_become: no 
 ansible_connection: local
 
+# Using different openshift version, default is v3.10
+#openshift_release: "v3.11" 
+#v_origin_installer_image: v3.11.0
+
 # Recommended to put this file inside vault 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html
 
