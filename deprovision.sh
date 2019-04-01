@@ -12,5 +12,5 @@ docker run -t -u `id -u` -v ${_CURR_DIR}/artifacts:/runner/artifacts:Z \
  -v ${_CURR_DIR}/roles:/runner/roles:Z \
  -e PROJECT_DIR=${_CURR_DIR}/project \
  -e RUNNER_PLAYBOOK=deprovision-cloud-resources.yaml \
- kameshsampath/ansible-runner:latest \
+ quay.io/workspace7/ansible-runner:latest
 
