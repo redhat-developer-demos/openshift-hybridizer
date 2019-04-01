@@ -2,7 +2,7 @@
 ansible_become: no 
 ansible_connection: local
 
-# Using different openshift version, default is v3.10
+# Using different openshift version, default is v3.11
 #openshift_release: "v3.11" 
 #v_origin_installer_image: v3.11.0
 
